@@ -181,7 +181,7 @@ private:
 class FormalDeclNode : public VarDeclNode{
 public:
 	FormalDeclNode(Position * p, TypeNode * type, IDNode * id) 
-	: VarDeclNode(p), VarDeclNode(type), VarDeclNode(id){ }
+	: VarDeclNode(p, type, id) { }
 	void unparse(std::ostream& out, int indent);
 };
 
@@ -239,6 +239,15 @@ public:
 	StringTypeNode(Position * p) : TypeNode(p){ }
 	void unparse(std::ostream& out, int indent);
 };
+
+class BinaryExpNode : public ExpNode {
+public:
+	BinaryExpNode(Position * p, ExpNode * leftNode, ExpNode * rightNode) : ExpNode(p), leftNode(leftNode), rightNode(rightNode) {}
+	void unparse(std::ostream& out, int indent);
+private:
+	ExpNode * leftNode;
+	ExpNode * rightNode;
+}
 
 } //End namespace cshanty
 
