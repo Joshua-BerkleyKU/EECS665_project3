@@ -132,6 +132,15 @@ public:
 	ExpNode * expression;
 };
 
+class AssignExpNode : public StmtNode{
+public:
+	AssignExpNode(Position * p , ExpNode * Expression, LValNode * Variable) : StmtNode(p), expression(Expression), variable(Variable) { }
+	void unparse(std::ostream& out, int indent) override = 0;
+	private:
+	LValNode * variable;
+	ExpNode * expression;
+};
+
 /** An identifier. Note that IDNodes subclass
  * ExpNode because they can be used as part of an expression. 
 **/
