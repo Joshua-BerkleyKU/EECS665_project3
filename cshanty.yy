@@ -188,7 +188,7 @@ varDecl 	: type id SEMICOL
 		    $$ = new VarDeclNode(p, $1, $2);
 		  }
 
-varDeclList     : varDecl { }
+varDeclList     : varDecl { $$ = $1; }
 		| varDeclList varDecl { }
 
 type 		: INT { $$ = new IntTypeNode($1->pos()); }
@@ -208,7 +208,7 @@ formalDecl 	: type id { }
 stmtList 	: /* epsilon */ { }
 		| stmtList stmt { }
 
-stmt		: varDecl { }
+stmt		: varDecl { $$ = $1; }
 		| assignExp SEMICOL { }
 		| lval DEC SEMICOL { }
 		| lval INC SEMICOL { }
