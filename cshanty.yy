@@ -192,10 +192,10 @@ varDeclList     : varDecl { }
 		| varDeclList varDecl { }
 
 type 		: INT { $$ = new IntTypeNode($1->pos()); }
-		| BOOL { }
-		| id { }
-		| STRING { }
-		| VOID { }
+		| BOOL { $$ = new BoolTypeNode($1->pos()); }
+		| id { $$ = $1; }
+		| STRING { $$ = new StringTypeNode($1->pos()); }
+		| VOID { $$ = new VoidTypeNode($1->pos()); }
 
 fnDecl 		: type id LPAREN RPAREN OPEN stmtList CLOSE { }
 		| type id LPAREN formals RPAREN OPEN stmtList CLOSE { }
