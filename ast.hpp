@@ -135,6 +135,30 @@ public:
 	void unparse(std::ostream& out, int indent);
 };
 
+class BoolTypeNode : public TypeNode{
+public:
+	BoolTypeNode(Position * p) : TypeNode(p){ }
+	void unparse(std::ostream& out, int indent);
+};
+
+class VoidTypeNode : public TypeNode{
+public:
+	VoidTypeNode(Position * p) : TypeNode(p){ }
+	void unparse(std::ostream& out, int indent);
+};
+
+class StringTypeNode : public TypeNode{
+public:
+	StringTypeNode(Position * p) : TypeNode(p){ }
+	void unparse(std::ostream& out, int indent);
+};
+
+class RecordTypeNode : public TypeNode{
+public:
+	StringTypeNode(Position * p) : TypeNode(p){ }
+	void unparse(std::ostream& out, int indent);
+};
+
 } //End namespace cshanty
 
 #endif
