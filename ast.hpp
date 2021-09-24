@@ -136,6 +136,15 @@ public:
 	void unparse(std::ostream& out, int indent);
 };
 
+class RecordTypeNode : public DeclNode{
+public:
+	RecordTypeNode(Position * p, IDNode * id) 
+	: DeclNode(p), myId(id){ }
+	void unparse(std::ostream& out, int indent);
+private:
+	IDNode * myId;
+};
+
 class IntTypeNode : public TypeNode{
 public:
 	IntTypeNode(Position * p) : TypeNode(p){ }
