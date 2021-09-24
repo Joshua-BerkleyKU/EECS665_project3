@@ -236,7 +236,7 @@ public:
 
 class RecordTypeNode : public TypeNode{
 public:
-	StringTypeNode(Position * p) : TypeNode(p){ }
+	RecordTypeNode(Position * p) : TypeNode(p){ }
 	void unparse(std::ostream& out, int indent);
 };
 
