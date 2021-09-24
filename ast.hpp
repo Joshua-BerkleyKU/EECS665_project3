@@ -76,6 +76,11 @@ public:
 	TrueNode(Position * p) : ExpNode(p){ }
 };
 
+class FalseNode : public ExpNode{
+public:
+	FalseNode(Position * p) : ExpNode(p){ }
+};
+
 class StrLitNode : public ExpNode{
 public:
 	StrLitNode(Position * p, std::string Val) 
@@ -83,6 +88,15 @@ public:
 	void unparse(std::ostream& out, int indent);
 private:
 	std::string stringVal;
+};
+
+class IntLitNode : public ExpNode{
+public:
+	IntLitNode(Position * p, int Val) 
+	: ExpNode(p), numval(Val){ }
+	void unparse(std::ostream& out, int indent);
+private:
+	int numval;
 };
 
 class UnaryExpNode : public ExpNode{
@@ -96,12 +110,12 @@ private:
 
 class NegNode : public UnaryExpNode{
 public:
-	NegNode(Position * p, ExpNode * Expression) : UnaryExpNode(p), UnaryExpNode(Expression) { }
+	NegNode(Position * p, ExpNode * Expression) : UnaryExpNode(p,Expression) { }
 };
 
 class NotNode  : public UnaryExpNode{
 public:
-	NotNode(Position * p, ExpNode * Expression) : UnaryExpNode(p), UnaryExpNode(Expression) { }
+	NotNode(Position * p, ExpNode * Expression) : UnaryExpNode(p,Expression) { }
 };
 
 /**  \class TypeNode
@@ -165,7 +179,15 @@ public:
 	ExpNode * expression;
 };
 
-class AssignExpNode : public StmtNode{
+class AssignStmtNode : public StmtNode{
+public:
+	AssignStmtNode(Position * p , AssignExpNode * Assignment) : StmtNode(p), assignment(Assignment) { }
+	void unparse(std::ostream& out, int indent) override = 0;
+	private:
+	AssignExpNode * assignment;
+};
+
+class AssignExpNode : public ExpNode{
 public:
 	AssignExpNode(Position * p , ExpNode * Expression, LValNode * Variable) : StmtNode(p), expression(Expression), variable(Variable) { }
 	void unparse(std::ostream& out, int indent) override = 0;
@@ -224,7 +246,7 @@ private:
 class FormalDeclNode : public VarDeclNode{
 public:
 	FormalDeclNode(Position * p, TypeNode * type, IDNode * id) 
-	: VarDeclNode(p), VarDeclNode(type), VarDeclNode(id){ }
+	: VarDeclNode(p,type,id){ }
 	void unparse(std::ostream& out, int indent);
 };
 
