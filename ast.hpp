@@ -145,6 +145,9 @@ private:
 	IDNode * myId;
 };
 
+//------------------------------------------------------------------------------------------------------------------------------------
+//still need to add code for the list to work
+//------------------------------------------------------------------------------------------------------------------------------------
 class FnDeclNode : public DeclNode{
 public:
 	FnDeclNode(Position * p, TypeNode * type, IDNode * id,std::list<FormalDeclNode * > *  paramIn,std::list<StmtNode * > * funcBody) 
