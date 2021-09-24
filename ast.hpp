@@ -92,6 +92,22 @@ public:
 	void unparse(std::ostream& out, int indent) override = 0;
 };
 
+class PostDecStmtNode : public StmtNode{
+public:
+	PostDecStmtNode(Position * p , LValNode * Variable) : StmtNode(p), variable(Variable) { }
+	void unparse(std::ostream& out, int indent) override = 0;
+	private:
+	LValNode * variable;
+};
+
+class PostIncStmtNode : public StmtNode{
+public:
+	PostIncStmtNode(Position * p , LValNode * Variable) : StmtNode(p), variable(Variable) { }
+	void unparse(std::ostream& out, int indent) override = 0;
+	private:
+	LValNode * variable;
+};
+
 /** An identifier. Note that IDNodes subclass
  * ExpNode because they can be used as part of an expression. 
 **/
