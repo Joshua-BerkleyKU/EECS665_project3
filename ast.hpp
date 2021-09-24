@@ -108,6 +108,30 @@ public:
 	LValNode * variable;
 };
 
+class ReceiveStmtNode : public StmtNode{
+public:
+	ReceiveStmtNode(Position * p , LValNode * Variable) : StmtNode(p), variable(Variable) { }
+	void unparse(std::ostream& out, int indent) override = 0;
+	private:
+	LValNode * variable;
+};
+
+class ReportStmtNode : public StmtNode{
+public:
+	ReportStmtNode(Position * p , ExpNode * Expression) : StmtNode(p), expression(Expression) { }
+	void unparse(std::ostream& out, int indent) override = 0;
+	private:
+	ExpNode * expression;
+};
+
+class ReturnStmtNode : public StmtNode{
+public:
+	ReturnStmtNode(Position * p , ExpNode * Expression) : StmtNode(p), expression(Expression) { }
+	void unparse(std::ostream& out, int indent) override = 0;
+	private:
+	ExpNode * expression;
+};
+
 /** An identifier. Note that IDNodes subclass
  * ExpNode because they can be used as part of an expression. 
 **/
