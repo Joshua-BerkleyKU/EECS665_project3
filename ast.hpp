@@ -29,7 +29,7 @@ protected:
 	Position * myPos;
 };
 
-/** 
+/**
 * \class ProgramNode
 * Class that contains the entire abstract syntax tree for a program.
 * Note the list of declarations encompasses all global declarations
@@ -52,8 +52,8 @@ public:
 
 
 /** \class DeclNode
-* Superclass for declarations (i.e. nodes that can be used to 
-* declare a struct, function, variable, etc).  This base class will 
+* Superclass for declarations (i.e. nodes that can be used to
+* declare a struct, function, variable, etc).  This base class will
 **/
 class DeclNode : public StmtNode{
 public:
@@ -83,7 +83,7 @@ public:
 
 class StrLitNode : public ExpNode{
 public:
-	StrLitNode(Position * p, std::string Val) 
+	StrLitNode(Position * p, std::string Val)
 	: ExpNode(p), stringVal(Val){ }
 	void unparse(std::ostream& out, int indent);
 private:
@@ -92,7 +92,7 @@ private:
 
 class IntLitNode : public ExpNode{
 public:
-	IntLitNode(Position * p, int Val) 
+	IntLitNode(Position * p, int Val)
 	: ExpNode(p), numval(Val){ }
 	void unparse(std::ostream& out, int indent);
 private:
@@ -101,7 +101,7 @@ private:
 
 class UnaryExpNode : public ExpNode{
 public:
-	UnaryExpNode(Position * p, ExpNode * Expression) 
+	UnaryExpNode(Position * p, ExpNode * Expression)
 	: ExpNode(p), expression(Expression){ }
 	void unparse(std::ostream& out, int indent);
 private:
@@ -110,16 +110,16 @@ private:
 
 class NegNode : public UnaryExpNode{
 public:
-	NegNode(Position * p, ExpNode * Expression) : UnaryExpNode(p,Expression) { }
+	NegNode(Position * p, ExpNode * Expression) : UnaryExpNode(p, Expression) { }
 };
 
 class NotNode  : public UnaryExpNode{
 public:
-	NotNode(Position * p, ExpNode * Expression) : UnaryExpNode(p,Expression) { }
+	NotNode(Position * p, ExpNode * Expression) : UnaryExpNode(p, Expression) { }
 };
 
 /**  \class TypeNode
-* Superclass of nodes that indicate a data type. For example, in 
+* Superclass of nodes that indicate a data type. For example, in
 * the declaration "int a", the int part is the type node (a is an IDNode
 * and the whole thing is a DeclNode).
 **/
@@ -129,7 +129,7 @@ protected:
 	}
 public:
 	virtual void unparse(std::ostream& out, int indent) = 0;
-	//TODO: consider adding an isRef to use in unparse to 
+	//TODO: consider adding an isRef to use in unparse to
 	// indicate if this is a reference type
 };
 
@@ -197,12 +197,12 @@ public:
 };
 
 /** An identifier. Note that IDNodes subclass
- * ExpNode because they can be used as part of an expression. 
+ * ExpNode because they can be used as part of an expression.
 **/
 
 class IDNode : public LValNode{
 public:
-	IDNode(Position * p, std::string nameIn) 
+	IDNode(Position * p, std::string nameIn)
 	: LValNode(p), name(nameIn){ }
 	void unparse(std::ostream& out, int indent);
 private:
@@ -212,29 +212,29 @@ private:
 
 class RecordTypeNode : public LValNode{
 public:
-	RecordTypeNode(Position * p, IDNode * id, IDNode * name) 
+	RecordTypeNode(Position * p, IDNode * id, IDNode * name)
 	: LValNode(p), Id_being_accessed(id), Name_being_accessed(name){ }
 	void unparse(std::ostream& out, int indent);
 private:
 	IDNode * Id_being_accessed;
 	IDNode * Name_being_accessed;
 };
- 
-/** A variable declaration. Note that this class is intended to 
+
+/** A variable declaration. Note that this class is intended to
  * represent a global or local variable of any type (including a struct
  * type. Note that this is not intended to represent a declaration of
  * a struct. In other words:
- * struct MyStruct { 
+ * struct MyStruct {
  *   int fieldA;
  * };
  * is NOT a VarDeclNode because it introduces a new datatype, not a new
  * variable (in this case, the example is a StructDeclNode).  * However,
- * struct MyStruct instance; *is* a VarDeclNode, since it introduces a 
- * new variable to the program. 
+ * struct MyStruct instance; *is* a VarDeclNode, since it introduces a
+ * new variable to the program.
 **/
 class VarDeclNode : public DeclNode{
 public:
-	VarDeclNode(Position * p, TypeNode * type, IDNode * id) 
+	VarDeclNode(Position * p, TypeNode * type, IDNode * id)
 	: DeclNode(p), myType(type), myId(id){
 	}
 	void unparse(std::ostream& out, int indent);
@@ -252,7 +252,7 @@ public:
 
 class RecordTypeNode : public DeclNode{
 public:
-	RecordTypeNode(Position * p, IDNode * id) 
+	RecordTypeNode(Position * p, IDNode * id)
 	: DeclNode(p), myId(id){ }
 	void unparse(std::ostream& out, int indent);
 private:
@@ -264,7 +264,7 @@ private:
 //------------------------------------------------------------------------------------------------------------------------------------
 class FnDeclNode : public DeclNode{
 public:
-	FnDeclNode(Position * p, TypeNode * type, IDNode * id,std::list<FormalDeclNode * > *  paramIn,std::list<StmtNode * > * funcBody) 
+	FnDeclNode(Position * p, TypeNode * type, IDNode * id,std::list<FormalDeclNode * > *  paramIn,std::list<StmtNode * > * funcBody)
 	: DeclNode(p), myType(type), myId(id){
 	}
 	void unparse(std::ostream& out, int indent);
