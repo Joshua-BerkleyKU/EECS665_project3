@@ -145,6 +145,19 @@ private:
 	IDNode * myId;
 };
 
+class FnDeclNode : public DeclNode{
+public:
+	FnDeclNode(Position * p, TypeNode * type, IDNode * id,std::list<FormalDeclNode * > *  paramIn,std::list<StmtNode * > * funcBody) 
+	: DeclNode(p), myType(type), myId(id){
+	}
+	void unparse(std::ostream& out, int indent);
+private:
+	TypeNode * myType;
+	IDNode * myId;
+	std::list<FormalDeclNode * > * parameters;
+	std::list<StmtNode * > * functionBody;
+};
+
 class IntTypeNode : public TypeNode{
 public:
 	IntTypeNode(Position * p) : TypeNode(p){ }
