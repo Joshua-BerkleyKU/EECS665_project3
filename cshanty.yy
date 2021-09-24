@@ -200,7 +200,7 @@ type 		: INT { $$ = new IntTypeNode($1->pos()); }
 fnDecl 		: type id LPAREN RPAREN OPEN stmtList CLOSE { }
 		| type id LPAREN formals RPAREN OPEN stmtList CLOSE { }
 
-formals 	: formalDecl { }
+formals 	: formalDecl { $$ = $1; }
 		| formals COMMA formalDecl { }
 
 formalDecl 	: type id { }
@@ -221,7 +221,7 @@ stmt		: varDecl { $$ = $1; }
 		| RETURN SEMICOL { }
 		| callExp SEMICOL { }
 
-exp		: assignExp { } 
+exp		: assignExp { $$ = $1; } 
 		| exp MINUS exp { }
 		| exp PLUS exp { }
 		| exp TIMES exp { }
@@ -246,7 +246,7 @@ exp		: assignExp { }
 		  }
 		| NOT exp { }
 		| MINUS term { }
-		| term { }
+		| term { $$ = $1; }
 
 assignExp	: lval ASSIGN exp { }
 
