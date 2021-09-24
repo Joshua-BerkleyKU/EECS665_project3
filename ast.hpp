@@ -129,6 +129,13 @@ private:
 	IDNode * myId;
 };
 
+class FormalDeclNode : public VarDeclNode{
+public:
+	FormalDeclNode(Position * p, TypeNode * type, IDNode * id) 
+	: VarDeclNode(p), VarDeclNode(type), VarDeclNode(id){ }
+	void unparse(std::ostream& out, int indent);
+};
+
 class IntTypeNode : public TypeNode{
 public:
 	IntTypeNode(Position * p) : TypeNode(p){ }
