@@ -96,12 +96,12 @@ private:
 
 class NegNode : public UnaryExpNode{
 public:
-	NegNode(Position * p, ExpNode * Expression) : UnaryExpNode(p), UnaryExpNode(Expression) { }
+	NegNode(Position * p, ExpNode * Expression) : UnaryExpNode(p, Expression) { }
 };
 
 class NotNode  : public UnaryExpNode{
 public:
-	NotNode(Position * p, ExpNode * Expression) : UnaryExpNode(p), UnaryExpNode(Expression) { }
+	NotNode(Position * p, ExpNode * Expression) : UnaryExpNode(p, Expression) { }
 };
 
 /**  \class TypeNode
