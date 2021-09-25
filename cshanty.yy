@@ -255,10 +255,26 @@ stmt	: varDecl { $$ = $1; }
 			Position * pos = $1->pos();
 		  	$$ = new AssignStmtNode(pos, $1);
 		}
-		| lval DEC SEMICOL { }
-		| lval INC SEMICOL { }
-		| RECEIVE lval SEMICOL { }
-		| REPORT exp SEMICOL { }
+		| lval DEC SEMICOL 
+		{ 
+			Position * pos = $1->pos();
+		  	$$ = new PostDecStmtNode(pos, $1);
+		}
+		| lval INC SEMICOL 
+		{ 
+			Position * pos = $1->pos();
+		  	$$ = new PostIncStmtNode(pos, $1);
+		}
+		| RECEIVE lval SEMICOL 
+		{ 
+			Position * pos = $2->pos();
+		  	$$ = new PostIncStmtNode(pos, $2);
+		}
+		| REPORT exp SEMICOL 
+		{ 
+			Position * pos = $2->pos();
+		  	$$ = new PostIncStmtNode(pos, $2);
+		}
 		| IF LPAREN exp RPAREN OPEN stmtList CLOSE { }
 		| IF LPAREN exp RPAREN OPEN stmtList CLOSE ELSE OPEN stmtList CLOSE { }
 		| WHILE LPAREN exp RPAREN OPEN stmtList CLOSE { }

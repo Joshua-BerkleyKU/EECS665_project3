@@ -219,4 +219,30 @@ void AssignStmtNode::unparse(std::ostream& out, int indent){
 	this->assignment->unparse(out, 0);
 }
 
+void PostDecStmtNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	this->variable->unparse(out, 0);
+	out << "--; \n";
+}
+
+void PostIncStmtNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	this->variable->unparse(out, 0);
+	out << "++; \n";
+}
+
+void ReceiveStmtNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << " receive ";
+	this->variable->unparse(out, 0);
+	out << "; \n";
+}
+
+void ReportStmtNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << " report ";
+	this->expression->unparse(out, 0);
+	out << "; \n";
+}
+
 } // End namespace cshanty
