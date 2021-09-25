@@ -229,7 +229,7 @@ type 	: INT { $$ = new IntTypeNode($1->pos()); }
 		| id 
 		{ 
 			Position * pos = $1->pos();
-			$$ = new RecordTypeNode(pos,$1); /* i fell like this is wrong */
+			$$ = new RecordTypeNode(pos,$1);
 		}
 		| STRING { $$ = new StringTypeNode($1->pos()); }
 		| VOID { $$ = new VoidTypeNode($1->pos()); }
