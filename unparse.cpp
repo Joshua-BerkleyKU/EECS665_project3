@@ -245,4 +245,11 @@ void ReportStmtNode::unparse(std::ostream& out, int indent){
 	out << "; \n";
 }
 
+void ReturnStmtNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << " return ";
+	this->expression->unparse(out, 0);
+	out << "; \n";
+}
+
 } // End namespace cshanty

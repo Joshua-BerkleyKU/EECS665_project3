@@ -278,8 +278,12 @@ stmt	: varDecl { $$ = $1; }
 		| IF LPAREN exp RPAREN OPEN stmtList CLOSE { }
 		| IF LPAREN exp RPAREN OPEN stmtList CLOSE ELSE OPEN stmtList CLOSE { }
 		| WHILE LPAREN exp RPAREN OPEN stmtList CLOSE { }
-		| RETURN exp SEMICOL { }
-		| RETURN SEMICOL { }
+		| RETURN exp SEMICOL 
+		{ 
+			Position * pos = $2->pos();
+		  	$$ = new ReturnStmtNode(pos, $2);
+		}
+		| RETURN SEMICOL {/* don't know what to add here */ }
 		| callExp SEMICOL 
 		{ 
 			Position * pos = $1->pos();
