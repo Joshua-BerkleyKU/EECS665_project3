@@ -288,6 +288,9 @@ public:
 	RecordTypeDeclNode(Position * p)
 	: DeclNode(p){ }
 	void unparse(std::ostream& out, int indent)override;
+	//------------------------------------------------------------------------------------------------
+	//might have to add a list here
+	//------------------------------------------------------------------------------------------------
 };
 
 class FnDeclNode : public DeclNode{
