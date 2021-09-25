@@ -229,7 +229,7 @@ formals : formalDecl { /*$$ = $1; */}
 formalDecl 	: type id 
 			{
 				Position * p = new Position($1->pos(), $2->pos());
-		    	$$ = new VarDeclNode(p, $1, $2); 
+		    	$$ = new FormalDeclNode(p, $2, $1); 
 			}
 
 stmtList 	: /* epsilon */ { }
