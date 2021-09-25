@@ -191,16 +191,16 @@ varDecl 	: type id SEMICOL
 varDeclList     : varDecl { /*$$ = $1; */}
 		| varDeclList varDecl { }
 
-type 		: INT { $$ = new IntTypeNode($1->pos()); }
+type 	: INT { $$ = new IntTypeNode($1->pos()); }
 		| BOOL { $$ = new BoolTypeNode($1->pos()); }
 		| id { /*$$ = $1;*/ }
 		| STRING { $$ = new StringTypeNode($1->pos()); }
 		| VOID { $$ = new VoidTypeNode($1->pos()); }
 
-fnDecl 		: type id LPAREN RPAREN OPEN stmtList CLOSE { }
+fnDecl 	: type id LPAREN RPAREN OPEN stmtList CLOSE { }
 		| type id LPAREN formals RPAREN OPEN stmtList CLOSE { }
 
-formals 	: formalDecl { /*$$ = $1; */}
+formals : formalDecl { /*$$ = $1; */}
 		| formals COMMA formalDecl { }
 
 formalDecl 	: type id { }
@@ -208,7 +208,7 @@ formalDecl 	: type id { }
 stmtList 	: /* epsilon */ { }
 		| stmtList stmt { }
 
-stmt		: varDecl { /*$$ = $1;*/ }
+stmt	: varDecl { /*$$ = $1;*/ }
 		| assignExp SEMICOL { }
 		| lval DEC SEMICOL { }
 		| lval INC SEMICOL { }
@@ -250,21 +250,29 @@ exp		: assignExp { /*$$ = $1;*/ }
 
 assignExp	: lval ASSIGN exp { }
 
-callExp		: id LPAREN RPAREN { }
+callExp	: id LPAREN RPAREN { }
 		| id LPAREN actualsList RPAREN { }
 
 actualsList	: exp { }
 		| actualsList COMMA exp { }
 
-term 		: lval { }
-		| INTLITERAL { }
-		| STRLITERAL { }
-		| TRUE { }
-		| FALSE { }
+term 	: lval { /*$$ = $1;*/ }
+		| INTLITERAL 
+		{
+			Position * pos = $1->pos();
+		  	$$ = new IntLitNode(pos, $1->value());
+		}
+		| STRLITERAL 
+		{ 
+			Position * pos = $1->pos();
+		  	$$ = new StrLitNode(pos, $1->value());
+		}
+		| TRUE { $$ = new TrueNode($1->pos());}
+		| FALSE { $$ = new FalseNode($1->pos());}
 		| LPAREN exp RPAREN { }
-		| callExp { }
+		| callExp { /*$$ = $1;*/ }
 
-lval		: id { /*$$ = $1;*/ }
+lval	: id { /*$$ = $1;*/ }
 		| id LBRACE id RBRACE { }
 
 id		: ID
