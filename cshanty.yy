@@ -66,6 +66,19 @@ project)
    cshanty::TypeNode *                     transType;
    cshanty::IDNode *                       transID;
    cshanty::LValNode *                     transLVal;
+
+   cshanty::AndNode *                      transAnd;
+   cshanty::DivideNode *                   transDivide;
+   cshanty::EqualsNode *                   transEquals;
+   cshanty::GreaterEqNode *                transGreaterEq;
+   cshanty::GreaterNode *                  transGreater;
+   cshanty::LessEqNode *                   transLessEq;
+   cshanty::LessNode *                     transLess;
+   cshanty::MinusNode *                    transMinus;
+   cshanty::NotEqualsNode *                transNotEqual;
+   cshanty::OrNode *                       transOr;
+   cshanty::PlusNode *                     transPlus;
+   cshanty::TimesNode *                    transTimes;
 }
 
 %define parse.assert
