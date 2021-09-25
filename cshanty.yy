@@ -335,7 +335,11 @@ exp		: assignExp { $$ = $1; }
 		}
 		| term { $$ = $1; }
 
-assignExp	: lval ASSIGN exp { }
+assignExp	: lval ASSIGN exp 
+			{ 
+				Position * p = new Position($1->pos(), $3->pos());
+				$$ = new AssignExpNode(p, $1, $3);
+			}
 
 callExp	: id LPAREN RPAREN { }
 		| id LPAREN actualsList RPAREN { }
