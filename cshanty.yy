@@ -226,7 +226,7 @@ varDeclList     : varDecl { $$ = $1; }
 
 type 	: INT { $$ = new IntTypeNode($1->pos()); }
 		| BOOL { $$ = new BoolTypeNode($1->pos()); }
-		| id { $$ = new RecordTypeNode($1->pos()); }
+		| id { $$ = new RecordTypeNode($1->pos()); /* i fell like this is wrong */}
 		| STRING { $$ = new StringTypeNode($1->pos()); }
 		| VOID { $$ = new VoidTypeNode($1->pos()); }
 
