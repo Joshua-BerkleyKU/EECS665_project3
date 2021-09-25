@@ -307,11 +307,11 @@ private:
 
 class AssignExpNode : public ExpNode{
 public:
-	AssignExpNode(Position * p , ExpNode * Expression, LValNode * Variable) : ExpNode(p), expression(Expression), variable(Variable) { }
+	AssignExpNode(Position * p , ExpNode * Expression, LValNode * Variable) : ExpNode(p), test2(Expression), test1(Variable) { }
 	void unparse(std::ostream& out, int indent) override;
 private:
-	LValNode * variable;
-	ExpNode * expression;
+	LValNode * test1;
+	ExpNode * test2;
 };
 
 class AssignStmtNode : public StmtNode{
