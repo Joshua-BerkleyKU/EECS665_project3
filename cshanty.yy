@@ -193,7 +193,7 @@ varDeclList     : varDecl { /*$$ = $1; */}
 
 type 		: INT { $$ = new IntTypeNode($1->pos()); }
 		| BOOL { $$ = new BoolTypeNode($1->pos()); }
-		| id { $$ = $1; }
+		| id { /*$$ = $1;*/ }
 		| STRING { $$ = new StringTypeNode($1->pos()); }
 		| VOID { $$ = new VoidTypeNode($1->pos()); }
 
