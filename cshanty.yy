@@ -264,7 +264,7 @@ term 		: lval { }
 		| LPAREN exp RPAREN { }
 		| callExp { }
 
-lval		: id { $$ = $1; }
+lval		: id { /*$$ = $1;*/ }
 		| id LBRACE id RBRACE { }
 
 id		: ID
