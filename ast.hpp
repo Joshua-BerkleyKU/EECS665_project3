@@ -118,6 +118,24 @@ public:
 	NotNode(Position * p, ExpNode * Expression) : UnaryExpNode(p, Expression) { }
 };
 
+class CallExpNode : public ExpNode{
+public:
+	CallExpNode(Position * p , IDNode * Name ) : ExpNode(p), nameFunc(Name) { }
+	void unparse(std::ostream& out, int indent) override = 0;
+	private:
+	IDNode * nameFunc;
+	std::list<ExpNode * > * arguments;
+};
+
+class CallStmtNode : public StmtNode{
+public:
+	CallStmtNode(Position * p, CallExpNode * func)
+	: StmtNode(p), Function(func){ }
+	void unparse(std::ostream& out, int indent);
+private:
+	CallExpNode * Function;
+};
+
 /**  \class TypeNode
 * Superclass of nodes that indicate a data type. For example, in
 * the declaration "int a", the int part is the type node (a is an IDNode
@@ -194,6 +212,34 @@ public:
 	private:
 	LValNode * variable;
 	ExpNode * expression;
+};
+
+class WhileStmtNode : public StmtNode{
+public:
+	WhileStmtNode(Position * p , ExpNode * Condition ) : StmtNode(p), condition(Condition) { }
+	void unparse(std::ostream& out, int indent) override = 0;
+	private:
+	ExpNode * condition;
+	std::list<StmtNode * > * WhileBody;
+};
+
+class IfStmtNode : public StmtNode{
+public:
+	IfStmtNode(Position * p , ExpNode * Condition ) : StmtNode(p), condition(Condition) { }
+	void unparse(std::ostream& out, int indent) override = 0;
+	private:
+	ExpNode * condition;
+	std::list<StmtNode * > * IfBody;
+};
+
+class IfElseStmtNode : public StmtNode{
+public:
+	IfElseStmtNode(Position * p , ExpNode * Condition ) : StmtNode(p), condition(Condition) { }
+	void unparse(std::ostream& out, int indent) override = 0;
+	private:
+	ExpNode * condition;
+	std::list<StmtNode * > * IfTrueBody;
+	std::list<StmtNode * > * IfFalseBody;
 };
 
 /** An identifier. Note that IDNodes subclass
