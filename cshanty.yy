@@ -59,8 +59,8 @@ project)
    cshanty::Token* lexeme;
    cshanty::Token* transToken;
    cshanty::IDToken*                       transIDToken;
-   cshanty::IntToken*                      transIntToken;
-   cshanty::StrToken*                      transStrToken;
+   cshanty::IntlitToken*                   transIntToken;
+   cshanty::StringToken*                   transStrToken;
    cshanty::ProgramNode*                   transProgram;
    std::list<cshanty::DeclNode *> *        transDeclList;
    cshanty::DeclNode *                     transDecl;
