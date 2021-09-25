@@ -141,6 +141,7 @@ project)
 %type <transType>       type
 %type <transLVal>       lval
 %type <transID>         id
+%type <transExp>        exp
 
 
 %right ASSIGN
