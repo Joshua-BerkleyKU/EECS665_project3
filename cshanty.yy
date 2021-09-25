@@ -73,6 +73,7 @@ project)
    cshanty::CallExpNode *                  transCallExp;
    cshanty::FnDeclNode *                   transFnDecl;
    cshanty::RecordTypeDeclNode *           transRecordTypeDecl;
+   cshanty::FormalDeclNode *               transFormalDecl;
 }
 
 %define parse.assert
@@ -151,6 +152,7 @@ project)
 %type <transCallExp>    callExp
 %type <transFnDecl>     fnDecl
 %type <transRecordTypeDecl>  recordDecl
+%type <transFormalDecl> formalDecl
 
 
 %right ASSIGN
