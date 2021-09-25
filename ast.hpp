@@ -201,14 +201,6 @@ public:
 	ExpNode * expression;
 };
 
-class AssignStmtNode : public StmtNode{
-public:
-	AssignStmtNode(Position * p , AssignExpNode * Assignment) : StmtNode(p), assignment(Assignment) { }
-	void unparse(std::ostream& out, int indent) override;
-private:
-	AssignExpNode * assignment;
-};
-
 class WhileStmtNode : public StmtNode{
 public:
 	WhileStmtNode(Position * p , ExpNode * Condition ) : StmtNode(p), condition(Condition) { }
@@ -320,6 +312,14 @@ public:
 private:
 	LValNode * variable;
 	ExpNode * expression;
+};
+
+class AssignStmtNode : public StmtNode{
+public:
+	AssignStmtNode(Position * p , AssignExpNode * Assignment) : StmtNode(p), assignment(Assignment) { }
+	void unparse(std::ostream& out, int indent) override;
+private:
+	AssignExpNode * assignment;
 };
 
 class IntTypeNode : public TypeNode{
