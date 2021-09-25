@@ -67,9 +67,8 @@ project)
    cshanty::IDNode *                       transID;
    cshanty::LValNode *                     transLVal;
 
-   cshanty::FnDeclNode *                   transFnDecl;
-   cshanty::RecordTypeDeclNode *           transRecordTypeDec;
    cshanty::ExpNode *                      transExp;
+   cshanty::ExpNode *                      transterm;
 }
 
 %define parse.assert
@@ -141,7 +140,9 @@ project)
 %type <transType>       type
 %type <transLVal>       lval
 %type <transID>         id
+
 %type <transExp>        exp
+%type <transterm>        term
 
 
 %right ASSIGN
@@ -316,7 +317,7 @@ callExp	: id LPAREN RPAREN { }
 actualsList	: exp { /*$$ = $1;*/ }
 		| actualsList COMMA exp { }
 
-term 	: lval { /*$$ = $1;*/ }
+term 	: lval { $$ = $1; }
 		| INTLITERAL 
 		{
 			Position * pos = $1->pos();
@@ -330,7 +331,7 @@ term 	: lval { /*$$ = $1;*/ }
 		| TRUE { $$ = new TrueNode($1->pos());}
 		| FALSE { $$ = new FalseNode($1->pos());}
 		| LPAREN exp RPAREN { }
-		| callExp { /*$$ = $1;*/ }
+		| callExp { $$ = $1; }
 
 lval	: id { /*$$ = $1;*/ }
 		| id LBRACE id RBRACE { }
