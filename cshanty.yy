@@ -170,7 +170,7 @@ decl 		: varDecl
 		  {
 			//Passhthrough rule. This nonterminal is just for 
 			// grammar structure
-			$$ = $1; 
+			//$$ = $1; 
 		  }
 		| fnDecl 
 		  { 
