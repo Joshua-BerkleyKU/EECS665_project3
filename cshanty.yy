@@ -230,32 +230,78 @@ stmt	: varDecl { /*$$ = $1;*/ }
 		| RETURN SEMICOL { }
 		| callExp SEMICOL { }
 
-exp		: assignExp { /*$$ = $1;*/ } 
-		| exp MINUS exp { }
-		| exp PLUS exp { }
-		| exp TIMES exp { }
-		| exp DIVIDE exp { }
-		| exp AND exp { }
-		| exp OR exp { }
-		| exp EQUALS exp { }
+exp		: assignExp { $$ = $1; } 
+		| exp MINUS exp 
+		{ 
+			Position * p = new Position($1->pos(), $3->pos());
+			$$ = new MinusNode(p, $1, $3); 
+		}
+		| exp PLUS exp 
+		{ 
+			Position * p = new Position($1->pos(), $3->pos());
+			$$ = new PlusNode(p, $1, $3); 
+		}
+		| exp TIMES exp 
+		{ 
+			Position * p = new Position($1->pos(), $3->pos());
+			$$ = new TimesNode(p, $1, $3); 
+		}
+		| exp DIVIDE exp 
+		{ 
+			Position * p = new Position($1->pos(), $3->pos());
+			$$ = new DivideNode(p, $1, $3); 
+		}
+		| exp AND exp 
+		{ 
+			Position * p = new Position($1->pos(), $3->pos());
+			$$ = new AndNode(p, $1, $3); 
+		}
+		| exp OR exp 
+		{ 
+			Position * p = new Position($1->pos(), $3->pos());
+			$$ = new OrNode(p, $1, $3); 
+		}
+		| exp EQUALS exp 
+		{ 
+			Position * p = new Position($1->pos(), $3->pos());
+			$$ = new EqualsNode(p, $1, $3); 
+		}
 		| exp NOTEQUALS exp
-	  	  {
-		  }
+	  	{
+			Position * p = new Position($1->pos(), $3->pos());
+			$$ = new NotEqualsNode(p, $1, $3); 
+		}
 		| exp GREATER exp
-	  	  {
-		  }
+	  	{
+			Position * p = new Position($1->pos(), $3->pos());
+			$$ = new GreaterNode(p, $1, $3); 
+		}
 		| exp GREATEREQ exp
-	  	  {
-		  }
+	  	{
+			Position * p = new Position($1->pos(), $3->pos());
+			$$ = new GreaterEqNode(p, $1, $3); 
+		}
 		| exp LESS exp
-	  	  {
-		  }
+	  	{
+			Position * p = new Position($1->pos(), $3->pos());
+			$$ = new LessNode(p, $1, $3); 
+		}
 		| exp LESSEQ exp
-	  	  {
-		  }
-		| NOT exp { }
-		| MINUS term { }
-		| term { /*$$ = $1;*/ }
+	  	{
+			Position * p = new Position($1->pos(), $3->pos());
+			$$ = new LessEqNode(p, $1, $3); 
+		}
+		| NOT exp 
+		{
+			Position * pos = $2->pos();
+		  	$$ = new NotNode(pos, $2); 
+		}
+		| MINUS term 
+		{ 
+			Position * pos = $2->pos();
+		  	$$ = new NegNode(pos, $2); 
+		}
+		| term { $$ = $1; }
 
 assignExp	: lval ASSIGN exp { }
 
