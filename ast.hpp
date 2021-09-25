@@ -150,7 +150,7 @@ protected:
 	TypeNode(Position * p) : ASTNode(p){
 	}
 public:
-	virtual void unparse(std::ostream& out, int indent) = 0;
+	virtual void unparse(std::ostream& out, int indent) override = 0;
 	//TODO: consider adding an isRef to use in unparse to
 	// indicate if this is a reference type
 };
