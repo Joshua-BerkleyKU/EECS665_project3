@@ -194,4 +194,12 @@ void AssignExpNode::unparse(std::ostream& out, int indent){
 	this->expression->unparse(out, 0);
 }
 
+void IndexNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	this->Id_being_accessed->unparse(out, 0);
+	out << " [";
+	this->field_Name_being_accessed->unparse(out, 0);
+	out << "] ";
+}
+
 } // End namespace cshanty

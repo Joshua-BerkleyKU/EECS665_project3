@@ -246,11 +246,11 @@ private:
 class IndexNode : public LValNode{
 public:
 	IndexNode(Position * p, IDNode * id, IDNode * name)
-	: LValNode(p), Id_being_accessed(id), Name_being_accessed(name){ }
+	: LValNode(p), Id_being_accessed(id), field_Name_being_accessed(name){ }
 	void unparse(std::ostream& out, int indent) override;
 private:
 	IDNode * Id_being_accessed;
-	IDNode * Name_being_accessed;
+	IDNode * field_Name_being_accessed;
 };
 
 /** A variable declaration. Note that this class is intended to

@@ -364,7 +364,11 @@ term 	: lval { $$ = $1; }
 		| callExp { $$ = $1; }
 
 lval	: id { $$ = $1; }
-		| id LBRACE id RBRACE { }
+		| id LBRACE id RBRACE 
+		{ 
+			Position * p = new Position($1->pos(), $3->pos());
+			$$ = new IndexNode(p, $1, $3);
+		}
 
 id		: ID
 		{
