@@ -285,11 +285,9 @@ public:
 
 class RecordTypeDeclNode : public DeclNode{
 public:
-	RecordTypeDeclNode(Position * p, IDNode * id)
-	: DeclNode(p), myId(id){ }
+	RecordTypeDeclNode(Position * p)
+	: DeclNode(p){ }
 	void unparse(std::ostream& out, int indent)override;
-private:
-	IDNode * myId;
 };
 
 class FnDeclNode : public DeclNode{
@@ -348,8 +346,11 @@ public:
 
 class RecordTypeNode : public TypeNode{
 public:
-	RecordTypeNode(Position * p) : TypeNode(p){ }
-	void unparse(std::ostream& out, int indent) override;
+	RecordTypeNode(Position * p, IDNode * id)
+	: TypeNode(p), myId(id){ }
+	void unparse(std::ostream& out, int indent)override;
+private:
+	IDNode * myId;
 };
 
 class BinaryExpNode : public ExpNode {

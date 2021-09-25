@@ -76,7 +76,7 @@ void StringTypeNode::unparse(std::ostream& out, int indent){
 }
 
 void RecordTypeNode::unparse(std::ostream& out, int indent){
-	out << "record";
+	out << this->myId;
 }
 
 void NotNode::unparse(std::ostream& out, int indent){
