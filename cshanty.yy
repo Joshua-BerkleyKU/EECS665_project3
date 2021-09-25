@@ -70,12 +70,17 @@ project)
    cshanty::LValNode *                     transLVal;
 
    cshanty::ExpNode *                      transExp;
+   cshanty::ExpNode *                      transActualsList;
    cshanty::ExpNode *                      transterm;
    cshanty::AssignExpNode *                transAssignExp;
    cshanty::CallExpNode *                  transCallExp;
    cshanty::FnDeclNode *                   transFnDecl;
    cshanty::RecordTypeDeclNode *           transRecordTypeDecl;
    cshanty::FormalDeclNode *               transFormalDecl;
+   cshanty::FormalDeclNode *               transFormals;
+   cshanty::VarDeclNode *                  transVarDecllist;
+   cshanty::StmtNode *                     transStmt;
+   cshanty::StmtNode *                     transStmtList;
 }
 
 %define parse.assert
@@ -155,6 +160,11 @@ project)
 %type <transFnDecl>     fnDecl
 %type <transRecordTypeDecl>  recordDecl
 %type <transFormalDecl> formalDecl
+%type <transFormals>     formals
+%type <transVarDecllist> varDeclList
+%type <transStmt>        stmt
+%type <transStmtList>    stmtList
+%type <transActualsList> actualsList
 
 
 %right ASSIGN
