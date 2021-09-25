@@ -343,8 +343,7 @@ assignExp	: lval ASSIGN exp
 
 callExp	: id LPAREN RPAREN 
 		{ 
-			Position * p = new Position($1->pos(),$1->pos());
-			$$ = new CallExpNode(p, $1, nullptr);
+			
 		}
 		| id LPAREN actualsList RPAREN { }
 
