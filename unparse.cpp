@@ -48,6 +48,13 @@ void VarDeclNode::unparse(std::ostream& out, int indent){
 	out << ";\n";
 }
 
+void FormalDeclNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	this->myType->unparse(out, 0);
+	out << " ";
+	this->myId->unparse(out, 0);
+}
+
 void IDNode::unparse(std::ostream& out, int indent){
 	out << this->name;
 }
