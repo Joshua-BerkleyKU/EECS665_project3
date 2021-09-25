@@ -270,7 +270,7 @@ public:
 	VarDeclNode(Position * p, TypeNode * type, IDNode * id)
 	: DeclNode(p), myType(type), myId(id){
 	}
-	void unparse(std::ostream& out, int indent) override = 0;
+	void unparse(std::ostream& out, int indent);
 private:
 	TypeNode * myType;
 	IDNode * myId;
