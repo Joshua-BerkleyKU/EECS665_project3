@@ -67,7 +67,7 @@ project)
    cshanty::IDNode *                       transID;
    cshanty::LValNode *                     transLVal;
 
-   cshanty::ExpNode *                      transExp;
+   cshanty::BinaryExpNode *                transBinaryExp;
    cshanty::ExpNode *                      transterm;
    cshanty::AssignExpNode *                transAssignExp;
    cshanty::CallExpNode *                  transCallExp;
@@ -146,7 +146,7 @@ project)
 %type <transLVal>       lval
 %type <transID>         id
 
-%type <transExp>        exp
+%type <transBinaryExp>  exp
 %type <transterm>       term
 %type <transAssignExp>  assignExp
 %type <transCallExp>    callExp
