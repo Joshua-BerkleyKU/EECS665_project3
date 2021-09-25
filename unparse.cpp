@@ -56,4 +56,44 @@ void IntTypeNode::unparse(std::ostream& out, int indent){
 	out << "int";
 }
 
+void BoolTypeNode::unparse(std::ostream& out, int indent){
+	out << "bool";
+}
+
+void VoidTypeNode::unparse(std::ostream& out, int indent){
+	out << "void";
+}
+
+void StringTypeNode::unparse(std::ostream& out, int indent){
+	out << "string";
+}
+
+void RecordTypeNode::unparse(std::ostream& out, int indent){
+	out << "record";
+}
+
+void NotNode::unparse(std::ostream& out, int indent){
+	out << "not";
+}
+
+void NegNode::unparse(std::ostream& out, int indent){
+	out << "neg";
+}
+
+void TrueNode::unparse(std::ostream& out, int indent){
+	out << "true";
+}
+
+void FalseNode::unparse(std::ostream& out, int indent){
+	out << "false";
+}
+
+void StrLitNode::unparse(std::ostream& out, int indent){
+	out << this->stringVal;
+}
+
+void IntLitNode::unparse(std::ostream& out, int indent){
+	out << this->numval;
+}
+
 } // End namespace cshanty
