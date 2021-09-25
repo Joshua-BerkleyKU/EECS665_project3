@@ -356,7 +356,7 @@ class BinaryExpNode : public ExpNode {
 public:
 	BinaryExpNode(Position * p, ExpNode * leftNode, ExpNode * rightNode) : ExpNode(p), leftNode(leftNode), rightNode(rightNode) {}
 	void unparse(std::ostream& out, int indent) override = 0;
-private:
+protected:
 	ExpNode * leftNode;
 	ExpNode * rightNode;
 };
