@@ -187,4 +187,11 @@ void AndNode::unparse(std::ostream& out, int indent){
 	this->rightNode->unparse(out, 0);
 }
 
+void AssignExpNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	this->variable->unparse(out, 0);
+	out << " = ";
+	this->expression->unparse(out, 0);
+}
+
 } // End namespace cshanty
