@@ -69,6 +69,8 @@ project)
 
    cshanty::ExpNode *                      transExp;
    cshanty::ExpNode *                      transterm;
+   cshanty::AssignExpNode *                transAssignExp;
+   cshanty::CallExpNode *                  transCallExp;
 }
 
 %define parse.assert
@@ -142,7 +144,9 @@ project)
 %type <transID>         id
 
 %type <transExp>        exp
-%type <transterm>        term
+%type <transterm>       term
+%type <transAssignExp>  assignExp
+%type <transCallExp>    callExp
 
 
 %right ASSIGN
