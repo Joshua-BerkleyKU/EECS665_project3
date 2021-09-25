@@ -201,16 +201,6 @@ public:
 	ExpNode * expression;
 };
 
-
-class AssignExpNode : public ExpNode{
-public:
-	AssignExpNode(Position * p , ExpNode * Expression, LValNode * Variable) : ExpNode(p), expression(Expression), variable(Variable) { }
-	void unparse(std::ostream& out, int indent) override;
-private:
-	LValNode * variable;
-	ExpNode * expression;
-};
-
 class AssignStmtNode : public StmtNode{
 public:
 	AssignStmtNode(Position * p , AssignExpNode * Assignment) : StmtNode(p), assignment(Assignment) { }
@@ -321,6 +311,15 @@ private:
 	IDNode * myId;
 	std::list<FormalDeclNode * > * parameters;
 	std::list<StmtNode * > * functionBody;
+};
+
+class AssignExpNode : public ExpNode{
+public:
+	AssignExpNode(Position * p , ExpNode * Expression, LValNode * Variable) : ExpNode(p), expression(Expression), variable(Variable) { }
+	void unparse(std::ostream& out, int indent) override;
+private:
+	LValNode * variable;
+	ExpNode * expression;
 };
 
 class IntTypeNode : public TypeNode{
