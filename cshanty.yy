@@ -250,7 +250,11 @@ stmtList 	: /* epsilon */ { }
 			| stmtList stmt { }
 
 stmt	: varDecl { $$ = $1; }
-		| assignExp SEMICOL { }
+		| assignExp SEMICOL 
+		{ 
+			Position * pos = $1->pos();
+		  	$$ = new AssignStmtNode(pos, $1);
+		}
 		| lval DEC SEMICOL { }
 		| lval INC SEMICOL { }
 		| RECEIVE lval SEMICOL { }
@@ -260,7 +264,11 @@ stmt	: varDecl { $$ = $1; }
 		| WHILE LPAREN exp RPAREN OPEN stmtList CLOSE { }
 		| RETURN exp SEMICOL { }
 		| RETURN SEMICOL { }
-		| callExp SEMICOL { }
+		| callExp SEMICOL 
+		{ 
+			Position * pos = $1->pos();
+		  	$$ = new CallStmtNode(pos, $1); 
+		}
 
 exp		: assignExp { $$ = $1; } 
 		| exp MINUS exp 
@@ -345,7 +353,10 @@ callExp	: id LPAREN RPAREN
 		{ 
 			
 		}
-		| id LPAREN actualsList RPAREN { }
+		| id LPAREN actualsList RPAREN 
+		{ 
+
+		}
 
 actualsList	: exp { $$ = $1; }
 		| actualsList COMMA exp { }
