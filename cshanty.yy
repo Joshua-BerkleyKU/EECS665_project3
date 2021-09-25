@@ -268,12 +268,12 @@ stmt	: varDecl { $$ = $1; }
 		| RECEIVE lval SEMICOL 
 		{ 
 			Position * pos = $2->pos();
-		  	$$ = new PostIncStmtNode(pos, $2);
+		  	$$ = new ReceiveStmtNode(pos, $2);
 		}
 		| REPORT exp SEMICOL 
 		{ 
 			Position * pos = $2->pos();
-		  	$$ = new PostIncStmtNode(pos, $2);
+		  	$$ = new ReportStmtNode(pos, $2);
 		}
 		| IF LPAREN exp RPAREN OPEN stmtList CLOSE { }
 		| IF LPAREN exp RPAREN OPEN stmtList CLOSE ELSE OPEN stmtList CLOSE { }
