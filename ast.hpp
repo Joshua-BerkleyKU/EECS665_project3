@@ -271,7 +271,7 @@ public:
 	: DeclNode(p), myType(type), myId(id){
 	}
 	void unparse(std::ostream& out, int indent) override;
-private:
+protected:
 	TypeNode * myType;
 	IDNode * myId;
 };
