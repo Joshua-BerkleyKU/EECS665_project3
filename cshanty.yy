@@ -188,7 +188,7 @@ varDecl 	: type id SEMICOL
 		    $$ = new VarDeclNode(p, $1, $2);
 		  }
 
-varDeclList     : varDecl { $$ = $1; }
+varDeclList     : varDecl { /*$$ = $1; */}
 		| varDeclList varDecl { }
 
 type 		: INT { $$ = new IntTypeNode($1->pos()); }
@@ -200,7 +200,7 @@ type 		: INT { $$ = new IntTypeNode($1->pos()); }
 fnDecl 		: type id LPAREN RPAREN OPEN stmtList CLOSE { }
 		| type id LPAREN formals RPAREN OPEN stmtList CLOSE { }
 
-formals 	: formalDecl { $$ = $1; }
+formals 	: formalDecl { /*$$ = $1; */}
 		| formals COMMA formalDecl { }
 
 formalDecl 	: type id { }
@@ -208,7 +208,7 @@ formalDecl 	: type id { }
 stmtList 	: /* epsilon */ { }
 		| stmtList stmt { }
 
-stmt		: varDecl { $$ = $1; }
+stmt		: varDecl { /*$$ = $1;*/ }
 		| assignExp SEMICOL { }
 		| lval DEC SEMICOL { }
 		| lval INC SEMICOL { }
@@ -221,7 +221,7 @@ stmt		: varDecl { $$ = $1; }
 		| RETURN SEMICOL { }
 		| callExp SEMICOL { }
 
-exp		: assignExp { $$ = $1; } 
+exp		: assignExp { /*$$ = $1;*/ } 
 		| exp MINUS exp { }
 		| exp PLUS exp { }
 		| exp TIMES exp { }
@@ -246,7 +246,7 @@ exp		: assignExp { $$ = $1; }
 		  }
 		| NOT exp { }
 		| MINUS term { }
-		| term { $$ = $1; }
+		| term { /*$$ = $1;*/ }
 
 assignExp	: lval ASSIGN exp { }
 
