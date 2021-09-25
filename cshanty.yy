@@ -66,6 +66,9 @@ project)
    cshanty::TypeNode *                     transType;
    cshanty::IDNode *                       transID;
    cshanty::LValNode *                     transLVal;
+
+   cshanty::FnDeclNode *                   transFnDecl;
+   cshanty::RecordTypeDeclNode *           transRecordTypeDec;
 }
 
 %define parse.assert
