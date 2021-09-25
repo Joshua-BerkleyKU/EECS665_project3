@@ -201,13 +201,6 @@ public:
 	ExpNode * expression;
 };
 
-class AssignStmtNode : public StmtNode{
-public:
-	AssignStmtNode(Position * p , AssignExpNode * Assignment) : StmtNode(p), assignment(Assignment) { }
-	void unparse(std::ostream& out, int indent) override;
-	private:
-	AssignExpNode * assignment;
-};
 
 class AssignExpNode : public ExpNode{
 public:
@@ -216,6 +209,14 @@ public:
 	private:
 	LValNode * variable;
 	ExpNode * expression;
+};
+
+class AssignStmtNode : public StmtNode{
+public:
+	AssignStmtNode(Position * p , AssignExpNode * Assignment) : StmtNode(p), assignment(Assignment) { }
+	void unparse(std::ostream& out, int indent) override;
+	private:
+	AssignExpNode * assignment;
 };
 
 class WhileStmtNode : public StmtNode{
