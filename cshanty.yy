@@ -59,8 +59,8 @@ project)
    cshanty::Token* lexeme;
    cshanty::Token* transToken;
    cshanty::IDToken*                       transIDToken;
-   cshanty::IntlitToken*                   transIntToken;
-   cshanty::StringToken*                   transStrToken;
+   cshanty::IntLitToken*                   transIntToken;
+   cshanty::StrToken*                      transStrToken;
    cshanty::ProgramNode*                   transProgram;
    std::list<cshanty::DeclNode *> *        transDeclList;
    cshanty::DeclNode *                     transDecl;
@@ -333,12 +333,12 @@ term 	: lval { $$ = $1; }
 		| INTLITERAL 
 		{
 			Position * pos = $1->pos();
-		  	$$ = new IntLitNode(pos, $1->value());
+		  	$$ = new IntLitNode(pos, $1->num());
 		}
 		| STRLITERAL 
 		{ 
 			Position * pos = $1->pos();
-		  	$$ = new StrLitNode(pos, $1->value());
+		  	$$ = new StrLitNode(pos, $1->str());
 		}
 		| TRUE { $$ = new TrueNode($1->pos());}
 		| FALSE { $$ = new FalseNode($1->pos());}
