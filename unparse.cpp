@@ -209,4 +209,14 @@ void CallExpNode::unparse(std::ostream& out, int indent){
 	//need work for the list
 }
 
+void CallStmtNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	this->Function->unparse(out, 0);
+}
+
+void AssignStmtNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	this->assignment->unparse(out, 0);
+}
+
 } // End namespace cshanty
