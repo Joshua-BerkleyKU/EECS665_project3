@@ -260,9 +260,9 @@ private:
 	std::string name;
 };
 
-class RecordTypeNode : public LValNode{
+class IndexNode : public LValNode{
 public:
-	RecordTypeNode(Position * p, IDNode * id, IDNode * name)
+	IndexNode(Position * p, IDNode * id, IDNode * name)
 	: LValNode(p), Id_being_accessed(id), Name_being_accessed(name){ }
 	void unparse(std::ostream& out, int indent) override;
 private:
@@ -300,9 +300,9 @@ public:
 	void unparse(std::ostream& out, int indent) override;
 };
 
-class RecordTypeNode : public DeclNode{
+class RecordTypeDeclNode : public DeclNode{
 public:
-	RecordTypeNode(Position * p, IDNode * id)
+	RecordTypeDeclNode(Position * p, IDNode * id)
 	: DeclNode(p), myId(id){ }
 	void unparse(std::ostream& out, int indent)override;
 private:
