@@ -71,6 +71,8 @@ project)
    cshanty::ExpNode *                      transterm;
    cshanty::AssignExpNode *                transAssignExp;
    cshanty::CallExpNode *                  transCallExp;
+   cshanty::FnDeclNode *                   transFnDecl;
+   cshanty::RecordTypeDeclNode *           transRecordTypeDecl;
 }
 
 %define parse.assert
@@ -147,6 +149,8 @@ project)
 %type <transterm>       term
 %type <transAssignExp>  assignExp
 %type <transCallExp>    callExp
+%type <transFnDecl>     fnDecl
+%type <transRecordTypeDecl>  recordDecl
 
 
 %right ASSIGN
