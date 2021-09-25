@@ -308,7 +308,7 @@ assignExp	: lval ASSIGN exp { }
 callExp	: id LPAREN RPAREN { }
 		| id LPAREN actualsList RPAREN { }
 
-actualsList	: exp { }
+actualsList	: exp { /*$$ = $1;*/ }
 		| actualsList COMMA exp { }
 
 term 	: lval { /*$$ = $1;*/ }
@@ -331,10 +331,10 @@ lval	: id { /*$$ = $1;*/ }
 		| id LBRACE id RBRACE { }
 
 id		: ID
-		  {
+		{
 		  Position * pos = $1->pos();
 		  $$ = new IDNode(pos, $1->value()); 
-		  }
+		}
 
 	
 %%
