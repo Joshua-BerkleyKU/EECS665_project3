@@ -156,17 +156,17 @@ program 	: globals
 		  }
 
 globals 	: globals decl 
-	  	  { 
-	  	  $$ = $1; 
-	  	  DeclNode * declNode = $2;
-		  $$->push_back(declNode);
-	  	  }
-		| /* epsilon */
-		  {
-		  $$ = new std::list<DeclNode * >();
-		  }
+			{ 
+			$$ = $1; 
+			DeclNode * declNode = $2;
+			$$->push_back(declNode);
+			}
+			| /* epsilon */
+			{
+			$$ = new std::list<DeclNode * >();
+			}
 
-decl 		: varDecl
+decl 	: varDecl
 		  {
 			//Passhthrough rule. This nonterminal is just for 
 			// grammar structure
@@ -177,19 +177,24 @@ decl 		: varDecl
 			//TODO: Make sure to fill out this rule
 			// (as well as any other empty rule!)
 			// with the appropriate SDD to create an AST
+			$$ = $1; 
 		  }
-		| recordDecl { /* SDD Rules can even be on the same line if you want */ }
+		| recordDecl 
+		{ 
+			/* SDD Rules can even be on the same line if you want */ 
+			$$ = $1; 
+		}
 
 recordDecl	: RECORD id OPEN varDeclList CLOSE { }
 
 varDecl 	: type id SEMICOL 
-		  { 
-		    Position * p = new Position($1->pos(), $2->pos());
-		    $$ = new VarDeclNode(p, $1, $2);
-		  }
+		  	{ 
+		    	Position * p = new Position($1->pos(), $2->pos());
+		    	$$ = new VarDeclNode(p, $1, $2);
+		  	}
 
 varDeclList     : varDecl { /*$$ = $1; */}
-		| varDeclList varDecl { }
+				| varDeclList varDecl { }
 
 type 	: INT { $$ = new IntTypeNode($1->pos()); }
 		| BOOL { $$ = new BoolTypeNode($1->pos()); }
@@ -203,10 +208,14 @@ fnDecl 	: type id LPAREN RPAREN OPEN stmtList CLOSE { }
 formals : formalDecl { /*$$ = $1; */}
 		| formals COMMA formalDecl { }
 
-formalDecl 	: type id { }
+formalDecl 	: type id 
+			{
+				Position * p = new Position($1->pos(), $2->pos());
+		    	$$ = new FormalDeclNode(p, $1, $2); 
+			}
 
 stmtList 	: /* epsilon */ { }
-		| stmtList stmt { }
+			| stmtList stmt { }
 
 stmt	: varDecl { /*$$ = $1;*/ }
 		| assignExp SEMICOL { }
