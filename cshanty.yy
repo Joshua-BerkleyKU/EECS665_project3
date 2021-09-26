@@ -282,7 +282,7 @@ stmt	: varDecl { $$ = $1; }
 		| RETURN exp SEMICOL 
 		{ 
 			Position * p = new Position($1->pos(), $3->pos());
-		  	$$ = new ReturnStmtNode(pos, $2);
+		  	$$ = new ReturnStmtNode(p, $2);
 		}
 		| RETURN SEMICOL {/* don't know what to add here */ }
 		| callExp SEMICOL 
@@ -355,12 +355,12 @@ exp		: assignExp { $$ = $1; }
 		| NOT exp 
 		{
 			Position * p = new Position($1->pos(), $2->pos());
-		  	$$ = new NotNode(pos, $2); 
+		  	$$ = new NotNode(p, $2); 
 		}
 		| MINUS term 
 		{ 
 			Position * p = new Position($1->pos(), $2->pos());
-		  	$$ = new NegNode(pos, $2); 
+		  	$$ = new NegNode(p, $2); 
 		}
 		| term { $$ = $1; }
 
