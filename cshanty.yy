@@ -201,7 +201,7 @@ varDecl 	: type id SEMICOL
 		    $$ = new VarDeclNode(p, $1, $2);
 		  }
 
-varDeclList     : varDecl { /*$$ = $1; */}
+varDeclList     : varDecl { $$ = $1; }
 		| varDeclList varDecl { }
 
 type 		: INT { $$ = new IntTypeNode($1->pos()); }
