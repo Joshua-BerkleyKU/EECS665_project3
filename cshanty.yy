@@ -217,7 +217,7 @@ recordDecl	: RECORD id OPEN varDeclList CLOSE { }
 
 varDecl 	: type id SEMICOL 
 		  	{ 
-		    	Position * p = new Position($1->pos(), $2->pos());
+		    	Position * p = new Position($1->pos(), $3->pos());
 		    	$$ = new VarDeclNode(p, $1, $2);
 		  	}
 
@@ -252,27 +252,28 @@ stmtList 	: /* epsilon */ { }
 stmt	: varDecl { $$ = $1; }
 		| assignExp SEMICOL 
 		{ 
-			Position * pos = $1->pos();
+			Position * p = new Position($1->pos(), $2
+			->pos());
 		  	$$ = new AssignStmtNode(pos, $1);
 		}
 		| lval DEC SEMICOL 
 		{ 
-			Position * pos = $1->pos();
+			Position * p = new Position($1->pos(), $3->pos());
 		  	$$ = new PostDecStmtNode(pos, $1);
 		}
 		| lval INC SEMICOL 
 		{ 
-			Position * pos = $1->pos();
+			Position * p = new Position($1->pos(), $3->pos());
 		  	$$ = new PostIncStmtNode(pos, $1);
 		}
 		| RECEIVE lval SEMICOL 
 		{ 
-			Position * pos = $2->pos();
+			Position * p = new Position($1->pos(), $3->pos());
 		  	$$ = new ReceiveStmtNode(pos, $2);
 		}
 		| REPORT exp SEMICOL 
 		{ 
-			Position * pos = $2->pos();
+			Position * p = new Position($1->pos(), $3->pos());
 		  	$$ = new ReportStmtNode(pos, $2);
 		}
 		| IF LPAREN exp RPAREN OPEN stmtList CLOSE { }
@@ -280,13 +281,13 @@ stmt	: varDecl { $$ = $1; }
 		| WHILE LPAREN exp RPAREN OPEN stmtList CLOSE { }
 		| RETURN exp SEMICOL 
 		{ 
-			Position * pos = $2->pos();
+			Position * p = new Position($1->pos(), $3->pos());
 		  	$$ = new ReturnStmtNode(pos, $2);
 		}
 		| RETURN SEMICOL {/* don't know what to add here */ }
 		| callExp SEMICOL 
 		{ 
-			Position * pos = $1->pos();
+			Position * p = new Position($1->pos(), $2->pos());
 		  	$$ = new CallStmtNode(pos, $1); 
 		}
 
@@ -353,12 +354,12 @@ exp		: assignExp { $$ = $1; }
 		}
 		| NOT exp 
 		{
-			Position * pos = $2->pos();
+			Position * p = new Position($1->pos(), $2->pos());
 		  	$$ = new NotNode(pos, $2); 
 		}
 		| MINUS term 
 		{ 
-			Position * pos = $2->pos();
+			Position * p = new Position($1->pos(), $2->pos());
 		  	$$ = new NegNode(pos, $2); 
 		}
 		| term { $$ = $1; }
@@ -400,7 +401,7 @@ term 	: lval { $$ = $1; }
 lval	: id { $$ = $1; }
 		| id LBRACE id RBRACE 
 		{ 
-			Position * p = new Position($1->pos(), $3->pos());
+			Position * p = new Position($1->pos(), $4->pos());
 			$$ = new IndexNode(p, $1, $3);
 		}
 
