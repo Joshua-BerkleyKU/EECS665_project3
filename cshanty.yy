@@ -213,7 +213,11 @@ decl 	: varDecl
 			$$ = $1; 
 		}
 
-recordDecl	: RECORD id OPEN varDeclList CLOSE { }
+recordDecl	: RECORD id OPEN varDeclList CLOSE 
+			{ 
+				Position * pos = $1->pos();
+				$$ = new RecordTypeNode(pos, $1);
+ 			}
 
 varDecl 	: type id SEMICOL 
 		  	{ 
@@ -221,8 +225,13 @@ varDecl 	: type id SEMICOL
 		    	$$ = new VarDeclNode(p, $1, $2);
 		  	}
 
-varDeclList     : varDecl { $$ = $1; }
-				| varDeclList varDecl { }
+varDeclList : varDecl { $$ = $1; }
+			| varDeclList varDecl 
+			{
+				$$ = $1; 
+				VarDeclNode * varDeclNode = $2;
+				$$->push_back(varDeclNode);
+			}
 
 type 	: INT { $$ = new IntTypeNode($1->pos()); }
 		| BOOL { $$ = new BoolTypeNode($1->pos()); }
