@@ -243,7 +243,10 @@ type 	: INT { $$ = new IntTypeNode($1->pos()); }
 		| STRING { $$ = new StringTypeNode($1->pos()); }
 		| VOID { $$ = new VoidTypeNode($1->pos()); }
 
-fnDecl 	: type id LPAREN RPAREN OPEN stmtList CLOSE { }
+fnDecl 	: type id LPAREN RPAREN OPEN stmtList CLOSE 
+		{ 
+
+		}
 		| type id LPAREN formals RPAREN OPEN stmtList CLOSE { }
 
 formals : formalDecl { $$ = $1; }
@@ -285,9 +288,21 @@ stmt	: varDecl { $$ = $1; }
 			Position * p = new Position($1->pos(), $3->pos());
 		  	$$ = new ReportStmtNode(p, $2);
 		}
-		| IF LPAREN exp RPAREN OPEN stmtList CLOSE { }
-		| IF LPAREN exp RPAREN OPEN stmtList CLOSE ELSE OPEN stmtList CLOSE { }
-		| WHILE LPAREN exp RPAREN OPEN stmtList CLOSE { }
+		| IF LPAREN exp RPAREN OPEN stmtList CLOSE 
+		{ 
+			Position * p = new Position($1->pos(), $7->pos());
+			$$ = new IfStmtNode(p, $3);
+		}
+		| IF LPAREN exp RPAREN OPEN stmtList CLOSE ELSE OPEN stmtList CLOSE
+		{ 
+			Position * p = new Position($1->pos(), $11->pos());
+			$$ = new IfElseStmtNode(p, $3);
+		}
+		| WHILE LPAREN exp RPAREN OPEN stmtList CLOSE 
+		{ 
+			Position * p = new Position($1->pos(), $7->pos());
+			$$ = new WhileStmtNode(p, $3);
+		}
 		| RETURN exp SEMICOL 
 		{ 
 			Position * p = new Position($1->pos(), $3->pos());
