@@ -285,12 +285,11 @@ public:
 
 class RecordTypeDeclNode : public DeclNode{
 public:
-	RecordTypeDeclNode(Position * p)
-	: DeclNode(p){ }
+	RecordTypeDeclNode(Position * p, IDNode * Id)
+	: DeclNode(p), myId(Id){ }
 	void unparse(std::ostream& out, int indent)override;
-	//------------------------------------------------------------------------------------------------
-	//might have to add a list here
-	//------------------------------------------------------------------------------------------------
+	IDNode * myId;
+	std::list<VarDeclNode * > * variables;
 };
 
 class FnDeclNode : public DeclNode{
