@@ -254,27 +254,27 @@ stmt	: varDecl { $$ = $1; }
 		{ 
 			Position * p = new Position($1->pos(), $2
 			->pos());
-		  	$$ = new AssignStmtNode(pos, $1);
+		  	$$ = new AssignStmtNode(p, $1);
 		}
 		| lval DEC SEMICOL 
 		{ 
 			Position * p = new Position($1->pos(), $3->pos());
-		  	$$ = new PostDecStmtNode(pos, $1);
+		  	$$ = new PostDecStmtNode(p, $1);
 		}
 		| lval INC SEMICOL 
 		{ 
 			Position * p = new Position($1->pos(), $3->pos());
-		  	$$ = new PostIncStmtNode(pos, $1);
+		  	$$ = new PostIncStmtNode(p, $1);
 		}
 		| RECEIVE lval SEMICOL 
 		{ 
 			Position * p = new Position($1->pos(), $3->pos());
-		  	$$ = new ReceiveStmtNode(pos, $2);
+		  	$$ = new ReceiveStmtNode(p, $2);
 		}
 		| REPORT exp SEMICOL 
 		{ 
 			Position * p = new Position($1->pos(), $3->pos());
-		  	$$ = new ReportStmtNode(pos, $2);
+		  	$$ = new ReportStmtNode(p, $2);
 		}
 		| IF LPAREN exp RPAREN OPEN stmtList CLOSE { }
 		| IF LPAREN exp RPAREN OPEN stmtList CLOSE ELSE OPEN stmtList CLOSE { }
@@ -288,7 +288,7 @@ stmt	: varDecl { $$ = $1; }
 		| callExp SEMICOL 
 		{ 
 			Position * p = new Position($1->pos(), $2->pos());
-		  	$$ = new CallStmtNode(pos, $1); 
+		  	$$ = new CallStmtNode(p, $1); 
 		}
 
 exp		: assignExp { $$ = $1; } 
