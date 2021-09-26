@@ -150,7 +150,7 @@ protected:
 	TypeNode(Position * p) : ASTNode(p){
 	}
 public:
-	virtual void unparse(std::ostream& out, int indent) = 0;
+	virtual void unparse(std::ostream& out, int indent) override = 0;
 	//TODO: consider adding an isRef to use in unparse to
 	// indicate if this is a reference type
 };
@@ -246,11 +246,11 @@ private:
 class IndexNode : public LValNode{
 public:
 	IndexNode(Position * p, IDNode * id, IDNode * name)
-	: LValNode(p), Id_being_accessed(id), Name_being_accessed(name){ }
+	: LValNode(p), Id_being_accessed(id), field_Name_being_accessed(name){ }
 	void unparse(std::ostream& out, int indent) override;
 private:
 	IDNode * Id_being_accessed;
-	IDNode * Name_being_accessed;
+	IDNode * field_Name_being_accessed;
 };
 
 /** A variable declaration. Note that this class is intended to
@@ -271,7 +271,7 @@ public:
 	: DeclNode(p), myType(type), myId(id){
 	}
 	void unparse(std::ostream& out, int indent) override;
-private:
+protected:
 	TypeNode * myType;
 	IDNode * myId;
 };
@@ -285,11 +285,12 @@ public:
 
 class RecordTypeDeclNode : public DeclNode{
 public:
-	RecordTypeDeclNode(Position * p, IDNode * id)
-	: DeclNode(p), myId(id){ }
+	RecordTypeDeclNode(Position * p)
+	: DeclNode(p){ }
 	void unparse(std::ostream& out, int indent)override;
-private:
-	IDNode * myId;
+	//------------------------------------------------------------------------------------------------
+	//might have to add a list here
+	//------------------------------------------------------------------------------------------------
 };
 
 class FnDeclNode : public DeclNode{
@@ -307,11 +308,12 @@ private:
 
 class AssignExpNode : public ExpNode{
 public:
-	AssignExpNode(Position * p , ExpNode * Expression, LValNode * Variable) : ExpNode(p), expression(Expression), variable(Variable) { }
+	AssignExpNode(Position * p ,  LValNode * Variable, ExpNode * Expression) : ExpNode(p),  variable(Variable), expression(Expression) { }
 	void unparse(std::ostream& out, int indent) override;
 private:
-	ExpNode * expression;
 	LValNode * variable;
+	ExpNode * expression;
+	
 };
 
 class AssignStmtNode : public StmtNode{
@@ -348,8 +350,11 @@ public:
 
 class RecordTypeNode : public TypeNode{
 public:
-	RecordTypeNode(Position * p) : TypeNode(p){ }
-	void unparse(std::ostream& out, int indent) override;
+	RecordTypeNode(Position * p, IDNode * id)
+	: TypeNode(p), myId(id){ }
+	void unparse(std::ostream& out, int indent)override;
+private:
+	IDNode * myId;
 };
 
 class BinaryExpNode : public ExpNode {

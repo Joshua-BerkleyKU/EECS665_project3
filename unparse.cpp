@@ -48,6 +48,13 @@ void VarDeclNode::unparse(std::ostream& out, int indent){
 	out << ";\n";
 }
 
+void FormalDeclNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	this->myType->unparse(out, 0);
+	out << " ";
+	this->myId->unparse(out, 0);
+}
+
 void IDNode::unparse(std::ostream& out, int indent){
 	out << this->name;
 }
@@ -69,7 +76,7 @@ void StringTypeNode::unparse(std::ostream& out, int indent){
 }
 
 void RecordTypeNode::unparse(std::ostream& out, int indent){
-	out << "record";
+	out << this->myId;
 }
 
 void NotNode::unparse(std::ostream& out, int indent){
@@ -178,6 +185,71 @@ void AndNode::unparse(std::ostream& out, int indent){
 	this->leftNode->unparse(out, 0);
 	out << " && ";
 	this->rightNode->unparse(out, 0);
+}
+
+void AssignExpNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	this->variable->unparse(out, 0);
+	out << " = ";
+	this->expression->unparse(out, 0);
+}
+
+void IndexNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	this->Id_being_accessed->unparse(out, 0);
+	out << " [";
+	this->field_Name_being_accessed->unparse(out, 0);
+	out << "] ";
+}
+
+void CallExpNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	this->nameFunc->unparse(out, 0);
+	out << " ";
+	//need work for the list
+}
+
+void CallStmtNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	this->Function->unparse(out, 0);
+}
+
+void AssignStmtNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	this->assignment->unparse(out, 0);
+}
+
+void PostDecStmtNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	this->variable->unparse(out, 0);
+	out << "--; \n";
+}
+
+void PostIncStmtNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	this->variable->unparse(out, 0);
+	out << "++; \n";
+}
+
+void ReceiveStmtNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << " receive ";
+	this->variable->unparse(out, 0);
+	out << "; \n";
+}
+
+void ReportStmtNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << " report ";
+	this->expression->unparse(out, 0);
+	out << "; \n";
+}
+
+void ReturnStmtNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << " return ";
+	this->expression->unparse(out, 0);
+	out << "; \n";
 }
 
 } // End namespace cshanty
