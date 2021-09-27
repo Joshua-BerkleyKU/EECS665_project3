@@ -252,4 +252,13 @@ void ReturnStmtNode::unparse(std::ostream& out, int indent){
 	out << "; \n";
 }
 
+void RecordTypeDeclNode::unparse(std::ostream& out, int indent) {
+	doIndent(out, indent);
+	out << "record " << myId << "{\n";
+	for (auto varDeclNode: *variables) {
+		varDeclNode->unparse(out, indent);
+	}
+	out << "}\n";
+}
+
 } // End namespace cshanty
