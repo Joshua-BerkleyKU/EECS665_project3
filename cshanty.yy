@@ -232,6 +232,10 @@ varDeclList : varDecl { $$ = $1; }
 				VarDeclNode * varDeclNode = $2;
 				$$->push_back(varDeclNode);
 			}
+			|
+			{
+				$$ = new std::list<VarDeclNode *>();
+			}
 
 type 	: INT { $$ = new IntTypeNode($1->pos()); }
 		| BOOL { $$ = new BoolTypeNode($1->pos()); }
@@ -308,7 +312,11 @@ stmt	: varDecl { $$ = $1; }
 			Position * p = new Position($1->pos(), $3->pos());
 		  	$$ = new ReturnStmtNode(p, $2);
 		}
-		| RETURN SEMICOL {/* don't know what to add here */ }
+		| RETURN SEMICOL
+		{ 
+			Position * p = new Position($1->pos(), $2->pos());
+		  	$$ = new ReturnStmtNode(p);
+		}
 		| callExp SEMICOL 
 		{ 
 			Position * p = new Position($1->pos(), $2->pos());
@@ -396,15 +404,22 @@ assignExp	: lval ASSIGN exp
 
 callExp	: id LPAREN RPAREN 
 		{ 
-			
+			Position * p = new Position($1->pos(), $3->pos());
+			$$ = new CallExpNode(p, $1);
 		}
 		| id LPAREN actualsList RPAREN 
 		{ 
-
+			Position * p = new Position($1->pos(), $4->pos());
+			$$ = new CallExpNode(p, $1, $3);
 		}
 
 actualsList	: exp { $$ = $1; }
-		| actualsList COMMA exp { }
+		| actualsList COMMA exp
+		{
+			$$ = $1; 
+			ExpNode * expNode = $3;
+			$$->push_back(expNode);
+		}
 
 term 	: lval { $$ = $1; }
 		| INTLITERAL 

@@ -125,6 +125,7 @@ public:
 class CallExpNode : public ExpNode{
 public:
 	CallExpNode(Position * p , IDNode * Name ) : ExpNode(p), nameFunc(Name) { }
+	CallExpNode(Position * p, IDNode * Name, std::list<ExpNode *> * Arguments) : ExpNode(p), nameFunc(Name), arguments(Arguments) { }
 	void unparse(std::ostream& out, int indent) override;
 	private:
 	IDNode * nameFunc;
@@ -196,6 +197,7 @@ public:
 class ReturnStmtNode : public StmtNode{
 public:
 	ReturnStmtNode(Position * p , ExpNode * Expression) : StmtNode(p), expression(Expression) { }
+	ReturnStmtNode(Position * p) : StmtNode(p) {}
 	void unparse(std::ostream& out, int indent) override;
 	private:
 	ExpNode * expression;
