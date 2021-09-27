@@ -9,3 +9,13 @@ cshanty::ProgramNode::ProgramNode(std::list<DeclNode *> * globalsIn)
 		);
 	}
 }
+
+cshanty::RecordTypeDeclNode::RecordTypeDeclNode(Position * p, IDNode * Id, std::list<VarDeclNode *> * Variables)
+: DeclNode(p), myId(Id), variables(Variables){
+	if (!Variables->empty()){
+		myPos->expand(
+			variables->front()->pos(),
+			variables->back()->pos()
+		);
+	}
+}

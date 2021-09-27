@@ -31,6 +31,7 @@
 
 %parse-param { cshanty::Scanner &scanner }
 %parse-param { cshanty::ProgramNode** root }
+%parse-param { cshanty::RecordTypeDeclNode** test }
 %code{
    // C std code for utility functions
    #include <iostream>
@@ -217,6 +218,7 @@ recordDecl	: RECORD id OPEN varDeclList CLOSE
 			{ 
 				Position * pos = new Position($1->pos(), $5->pos());
 				$$ = new RecordTypeDeclNode(pos, $2, $4);
+				*test = $$;
  			}
 
 varDecl 	: type id SEMICOL 
