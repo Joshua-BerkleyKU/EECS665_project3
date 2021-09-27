@@ -216,8 +216,6 @@ decl 	: varDecl
 recordDecl	: RECORD id OPEN varDeclList CLOSE 
 			{ 
 				Position * pos = new Position($1->pos(), $5->pos());
-				std::list<VarDeclNode *> * varList = new std::list<VarDeclNode *>();
-				$4 = varList;
 				$$ = new RecordTypeDeclNode(pos, $2, $4);
  			}
 
@@ -227,7 +225,12 @@ varDecl 	: type id SEMICOL
 		    	$$ = new VarDeclNode(p, $1, $2);
 		  	}
 
-varDeclList : varDecl { $$->push_back($1) }
+varDeclList : varDecl
+			{
+				std::list<VarDeclNode *> * list = new std::list<VarDeclNode *>();
+				list->push_back($1);
+				$$ = list;
+			}
 			| varDeclList varDecl 
 			{
 				$$ = $1; 
