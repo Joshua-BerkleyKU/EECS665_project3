@@ -221,8 +221,8 @@ recordDecl	: RECORD id OPEN varDeclList CLOSE
 
 varDecl 	: type id SEMICOL 
 		  	{ 
-		    	Position * p = new Position($1->pos(), $3->pos());
-		    	$$ = new VarDeclNode(p, $1, $2);
+		    	//Position * p = new Position($1->pos(), $3->pos());
+		    	//$$ = new VarDeclNode(p, $1, $2);
 		  	}
 
 varDeclList : varDecl { $$ = $1; }
