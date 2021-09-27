@@ -216,7 +216,7 @@ decl 	: varDecl
 recordDecl	: RECORD id OPEN varDeclList CLOSE 
 			{ 
 				Position * pos = new Position($1->pos(), $5->pos());
-				$$ = new RecordTypeDeclNode(pos);
+				$$ = new RecordTypeDeclNode(pos, $2, $4);
  			}
 
 varDecl 	: type id SEMICOL 
@@ -249,9 +249,14 @@ type 	: INT { $$ = new IntTypeNode($1->pos()); }
 
 fnDecl 	: type id LPAREN RPAREN OPEN stmtList CLOSE 
 		{ 
-
+			Position * p = new Position($1->pos(), $7->pos());
+			$$ = new FnDeclNode(p, $1, $2, $6);
 		}
-		| type id LPAREN formals RPAREN OPEN stmtList CLOSE { }
+		| type id LPAREN formals RPAREN OPEN stmtList CLOSE
+		{
+			Position * p = new Position($1->pos(), $8->pos());
+			$$ = new FnDeclNode(p, $1, $2, $4, $7);
+		}
 
 formals : formalDecl { $$ = $1; }
 		| formals COMMA formalDecl { }
