@@ -1,2 +1,4 @@
-int global1;
-int global2;
+void v() {
+int a;
+a = 5;
+}
