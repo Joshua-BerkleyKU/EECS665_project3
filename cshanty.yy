@@ -273,7 +273,7 @@ stmtList 	: /* epsilon */ { }
 			| stmtList stmt 
 			{ 
 				$$ = $1;
-				StmtDeclNode * stmt = $2;
+				StmtNode * stmt = $2;
 				$$->push_back(stmt);
 			}
 
