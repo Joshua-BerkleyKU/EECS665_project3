@@ -1,5 +1,5 @@
 void v() {
-    if(true)
+    if(int a)
     {
         int a;
     }
