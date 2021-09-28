@@ -254,7 +254,9 @@ void ReturnStmtNode::unparse(std::ostream& out, int indent){
 
 void RecordTypeDeclNode::unparse(std::ostream& out, int indent) {
 	doIndent(out, indent);
-	out << "record " << myId << "{\n";
+	out << "record ";
+	this->myId->unparse(out, 0);
+	out << "{\n";
 	for (auto varDeclNode: *variables) {
 		varDeclNode->unparse(out, indent);
 	}
@@ -263,7 +265,10 @@ void RecordTypeDeclNode::unparse(std::ostream& out, int indent) {
 
 void FnDeclNode::unparse(std::ostream& out, int indent) {
 	doIndent(out, indent);
-	out << myType << " " << myId << "(";
+	this->myType->unparse(out, 0);
+	out << " ";
+	this->myId->unparse(out, 0);
+	out << "(";
 	if (!(parameters == nullptr))
 	{
 		for (auto param: *parameters) {
@@ -276,8 +281,60 @@ void FnDeclNode::unparse(std::ostream& out, int indent) {
 		stmt->unparse(out, indent);
 	}
 	out << "\n}\n";
-	
-	
+}
+
+void IfStmtNode::unparse(std::ostream& out, int indent) {
+	doIndent(out, indent);
+	out << " If (";
+	this->condition->unparse(out, 0); 
+	out << ") {\n";
+	for (auto stmt: *IfBody)
+	{
+		stmt->unparse(out, indent);
+	}
+	out << "\n}\n";
+}
+
+void IfElseStmtNode::unparse(std::ostream& out, int indent) {
+	doIndent(out, indent);
+	out << " If (";
+	this->condition->unparse(out, 0); 
+	out << ") {\n";
+	for (auto stmt: *IfTrueBody)
+	{
+		stmt->unparse(out, indent);
+	}
+	out << "\n}\n else {\n";
+	for (auto stmt: *IfFalseBody)
+	{
+		stmt->unparse(out, indent);
+	}
+	out << "\n}\n";
+}
+
+void WhileStmtNode::unparse(std::ostream& out, int indent) {
+	doIndent(out, indent);
+	out << " While ("; 
+	this->condition->unparse(out, 0); 
+	out << ") {\n";
+	for (auto stmt: *WhileBody)
+	{
+		stmt->unparse(out, indent);
+	}
+	out << "\n}\n";
+}
+
+void CallExpNode::unparse(std::ostream& out, int indent) {
+	doIndent(out, indent);
+	this->nameFunc->unparse(out, 0); 
+	out << "(";
+	if (!(arguments == nullptr))
+	{
+		for (auto param: *parameters) {
+			param->unparse(out, indent);
+		}
+	}
+	out << ");";
 }
 
 } // End namespace cshanty
