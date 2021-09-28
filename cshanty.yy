@@ -228,6 +228,7 @@ varDecl 	: type id SEMICOL
 
 varDeclList : varDecl
 			{
+				$$ = new std::list<VarDeclNode *>();
 				VarDeclNode * varDecl = $1;
 				$$->push_back(varDecl);
 			}
@@ -262,6 +263,7 @@ fnDecl 	: type id LPAREN RPAREN OPEN stmtList CLOSE
 
 formals : formalDecl 
 		{ 
+			$$ = new std::list<FormalDeclNode *>();
 			FormalDeclNode * formalDecl = $1;
 			$$->push_back(formalDecl); 
 		}
@@ -436,6 +438,7 @@ callExp	: id LPAREN RPAREN
 
 actualsList	: exp 
 		{ 
+			$$ = new std::list<ExpNode *>();
 			ExpNode * expNode = $1;
 			$$->push_back(expNode); 
 		}
