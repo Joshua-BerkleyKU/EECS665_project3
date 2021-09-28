@@ -5,4 +5,5 @@ void function() {
   function();
   int a;
   int b;
+  function2(a,b);
 }
