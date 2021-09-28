@@ -305,7 +305,7 @@ public:
 private:
 	TypeNode * myType;
 	IDNode * myId;
-	std::list<FormalDeclNode * > * parameters;
+	std::list<FormalDeclNode * > * parameters = nullptr;
 	std::list<StmtNode * > * functionBody;
 };
 
