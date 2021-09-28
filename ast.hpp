@@ -282,7 +282,7 @@ class FormalDeclNode : public VarDeclNode{
 public:
 	FormalDeclNode(Position * p, TypeNode * type, IDNode * id)
 	: VarDeclNode(p, type, id) { }
-	void unparse(std::ostream& out, int indent) override = 0;
+	void unparse(std::ostream& out, int indent) override;
 };
 
 class RecordTypeDeclNode : public DeclNode{
