@@ -1,4 +1,6 @@
-void v(int a) {
-    int a;
-    a = 5;
+void v() {
+    if(true)
+    {
+        int a;
+    }
 }
