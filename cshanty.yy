@@ -269,7 +269,7 @@ formalDecl 	: type id
 		    	$$ = new FormalDeclNode(p, $1, $2); 
 			}
 
-stmtList 	: /* epsilon */ { }
+stmtList 	: /* epsilon */ { $$ = new std::list<StmtNode *>(); }
 			| stmtList stmt 
 			{ 
 				$$ = $1;
