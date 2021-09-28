@@ -230,6 +230,7 @@ varDeclList : varDecl
 			{
 				VarDeclNode * varDecl = $1;
 				$$->push_back(varDecl);
+				$$ = new std::list<VarDeclNode * >();
 			}
 			| varDeclList varDecl 
 			{
