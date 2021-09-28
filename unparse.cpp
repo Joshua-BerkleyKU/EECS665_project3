@@ -273,13 +273,13 @@ void ReturnStmtNode::unparse(std::ostream& out, int indent){
 
 void RecordTypeDeclNode::unparse(std::ostream& out, int indent) {
 	doIndent(out, indent);
-	/*out << "record ";
+	out << "record ";
 	this->myId->unparse(out, 0);
 	out << "{\n";
-	for (auto varDeclNode: *variables) {
+	/*for (auto varDeclNode: *variables) {
 		varDeclNode->unparse(out, indent);
-	}
-	out << "\n}\n";*/
+	}*/
+	out << "\n}\n";
 }
 
 void FnDeclNode::unparse(std::ostream& out, int indent) {
