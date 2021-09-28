@@ -56,50 +56,62 @@ void FormalDeclNode::unparse(std::ostream& out, int indent){
 }
 
 void IDNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << this->name;
 }
 
 void IntTypeNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << "int";
 }
 
 void BoolTypeNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << "bool";
 }
 
 void VoidTypeNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << "void";
 }
 
 void StringTypeNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << "string";
 }
 
 void RecordTypeNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << this->myId;
 }
 
 void NotNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << "not";
 }
 
 void NegNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << "neg";
 }
 
 void TrueNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << "true";
 }
 
 void FalseNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << "false";
 }
 
 void StrLitNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << this->stringVal;
 }
 
 void IntLitNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << this->numval;
 }
 
@@ -222,9 +234,9 @@ void AssignExpNode::unparse(std::ostream& out, int indent){
 void IndexNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
 	this->Id_being_accessed->unparse(out, 0);
-	out << " [";
+	out << "[";
 	this->field_Name_being_accessed->unparse(out, 0);
-	out << "] ";
+	out << "]";
 }
 
 void CallStmtNode::unparse(std::ostream& out, int indent){
@@ -252,21 +264,21 @@ void PostIncStmtNode::unparse(std::ostream& out, int indent){
 
 void ReceiveStmtNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
-	out << " receive ";
+	out << "receive ";
 	this->variable->unparse(out, 0);
 	out << "; \n";
 }
 
 void ReportStmtNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
-	out << " report ";
+	out << "report ";
 	this->expression->unparse(out, 0);
 	out << "; \n";
 }
 
 void ReturnStmtNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
-	out << " return ";
+	out << "return ";
 	this->expression->unparse(out, 0);
 	out << "; \n";
 }
@@ -276,9 +288,8 @@ void RecordTypeDeclNode::unparse(std::ostream& out, int indent) {
 	out << "record ";
 	this->myId->unparse(out, 0);
 	out << "{\n";
-	for (auto stmt : *variables)
-	{
-		stmt->unparse(out, indent);
+	for (auto varDeclNode: *variables) {
+		varDeclNode->unparse(out, indent + 1);
 	}
 	out << "\n}\n";
 }
@@ -289,23 +300,29 @@ void FnDeclNode::unparse(std::ostream& out, int indent) {
 	out << " ";
 	this->myId->unparse(out, 0);
 	out << "(";
-	if (!(parameters == nullptr))
+	
+	if (parameters != nullptr)
 	{
-		for (auto param: *parameters) {
-			param->unparse(out, indent);
+		std::string comma = "";
+		for (auto param: *parameters)
+		{
+			out << comma;
+			param->unparse(out, 0);
+			comma = ", ";
 		}
 	}
+	
 	out << ") {\n";
 	for (auto stmt: *functionBody)
 	{
-		stmt->unparse(out, indent);
+		stmt->unparse(out, indent + 1);
 	}
 	out << "\n}\n";
 }
 
 void IfStmtNode::unparse(std::ostream& out, int indent) {
 	doIndent(out, indent);
-	out << " If (";
+	out << "if (";
 	this->condition->unparse(out, 0); 
 	out << ") {\n";
 	for (auto stmt: *IfBody)
@@ -317,29 +334,29 @@ void IfStmtNode::unparse(std::ostream& out, int indent) {
 
 void IfElseStmtNode::unparse(std::ostream& out, int indent) {
 	doIndent(out, indent);
-	out << " If (";
+	out << "if (";
 	this->condition->unparse(out, 0); 
 	out << ") {\n";
 	for (auto stmt: *IfTrueBody)
 	{
-		stmt->unparse(out, indent);
+		stmt->unparse(out, indent + 1);
 	}
 	out << "\n}\n else {\n";
 	for (auto stmt: *IfFalseBody)
 	{
-		stmt->unparse(out, indent);
+		stmt->unparse(out, indent + 1);
 	}
 	out << "\n}\n";
 }
 
 void WhileStmtNode::unparse(std::ostream& out, int indent) {
 	doIndent(out, indent);
-	out << " While ("; 
+	out << "while ("; 
 	this->condition->unparse(out, 0); 
 	out << ") {\n";
 	for (auto stmt: *WhileBody)
 	{
-		stmt->unparse(out, indent);
+		stmt->unparse(out, indent + 1);
 	}
 	out << "\n}\n";
 }
@@ -351,7 +368,7 @@ void CallExpNode::unparse(std::ostream& out, int indent) {
 	if (!(arguments == nullptr))
 	{
 		for (auto args: *arguments) {
-			args->unparse(out, indent);
+			args->unparse(out, 0);
 		}
 	}
 	out << ");\n";

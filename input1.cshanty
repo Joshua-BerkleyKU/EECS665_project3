@@ -1,0 +1,14 @@
+int someFunc(int a, bool b) {
+    if (b && a < 2) {
+        return(a);
+    }
+    if (b && (a > 2)) {
+        return(a + 1);
+    }
+    if (!b && (a > 2)) {
+        return(a + 4);
+    }
+    else {
+        return(a + 3);
+    }
+}
