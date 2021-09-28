@@ -291,15 +291,15 @@ void FnDeclNode::unparse(std::ostream& out, int indent) {
 	
 	if (parameters != nullptr)
 	{
-		/*
 		std::string comma = "";
 		for (auto param: *parameters)
 		{
+			/*
 			out << comma;
 			param->unparse(out, 0);
 			comma = ", ";
+			*/
 		}
-		*/
 	}
 	
 	out << ") {\n";
