@@ -354,7 +354,7 @@ void CallExpNode::unparse(std::ostream& out, int indent) {
 			args->unparse(out, indent);
 		}
 	}
-	out << ");";
+	out << ");\n";
 }
 
 } // End namespace cshanty
