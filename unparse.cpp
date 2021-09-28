@@ -202,13 +202,6 @@ void IndexNode::unparse(std::ostream& out, int indent){
 	out << "] ";
 }
 
-void CallExpNode::unparse(std::ostream& out, int indent){
-	doIndent(out, indent);
-	this->nameFunc->unparse(out, 0);
-	out << " ";
-	//need work for the list
-}
-
 void CallStmtNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
 	this->Function->unparse(out, 0);
