@@ -251,7 +251,8 @@ type 	: INT { $$ = new IntTypeNode($1->pos()); }
 fnDecl 	: type id LPAREN RPAREN OPEN stmtList CLOSE 
 		{ 
 			Position * p = new Position($1->pos(), $7->pos());
-			$$ = new FnDeclNode(p, $1, $2, $6);
+			std::list<FormalDeclNode * > *  noParameters = nullptr;
+			$$ = new FnDeclNode(p, $1, $2, noParameters, $6);
 		}
 		| type id LPAREN formals RPAREN OPEN stmtList CLOSE
 		{
@@ -268,8 +269,13 @@ formalDecl 	: type id
 		    	$$ = new FormalDeclNode(p, $1, $2); 
 			}
 
-stmtList 	: /* epsilon */ { }
-			| stmtList stmt { }
+stmtList 	: /* epsilon */ { $$ = new std::list<StmtNode *>(); }
+			| stmtList stmt 
+			{ 
+				$$ = $1;
+				StmtNode * stmt = $2;
+				$$->push_back(stmt);
+			}
 
 stmt	: varDecl { $$ = $1; }
 		| assignExp SEMICOL 

@@ -297,8 +297,6 @@ private:
 
 class FnDeclNode : public DeclNode{
 public:
-	FnDeclNode(Position * p, TypeNode * type, IDNode * id, std::list<StmtNode * > * funcBody)
-	: DeclNode(p), myType(type), myId(id), parameters(nullptr), functionBody(funcBody) { }
 	FnDeclNode(Position * p, TypeNode * type, IDNode * id, std::list<FormalDeclNode * > *  paramIn, std::list<StmtNode * > * funcBody)
 	: DeclNode(p), myType(type), myId(id), parameters(paramIn), functionBody(funcBody) { }
 	void unparse(std::ostream& out, int indent) override;
