@@ -330,8 +330,8 @@ void CallExpNode::unparse(std::ostream& out, int indent) {
 	out << "(";
 	if (!(arguments == nullptr))
 	{
-		for (auto param: *parameters) {
-			param->unparse(out, indent);
+		for (auto args: *arguments) {
+			args->unparse(out, indent);
 		}
 	}
 	out << ");";
