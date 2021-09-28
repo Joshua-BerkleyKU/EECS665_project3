@@ -1,4 +1,4 @@
-void function() {
+void function(int a) {
   string test;
   bool notcool;
   test = "a hotdog is a sandwich";

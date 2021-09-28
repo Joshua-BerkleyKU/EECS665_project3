@@ -263,6 +263,7 @@ fnDecl 	: type id LPAREN RPAREN OPEN stmtList CLOSE
 
 formals : formalDecl 
 		{ 
+			$$ = new std::list<FormalDeclNode * >();
 			FormalDeclNode * formalDecl = $1;
 			$$->push_back(formalDecl); 
 		}
@@ -437,6 +438,7 @@ callExp	: id LPAREN RPAREN
 
 actualsList	: exp 
 		{ 
+			$$ = new std::list<ExpNode * >();
 			ExpNode * expNode = $1;
 			$$->push_back(expNode); 
 		}
