@@ -161,7 +161,7 @@ project)
 %type <transFnDecl>     fnDecl
 %type <transRecordTypeDecl>  recordDecl
 %type <transFormalDecl> formalDecl
-%type <transFormalDeclList>     formals
+%type <transFormalDeclList> formals
 %type <transVarList> 	varDeclList
 %type <transStmt>        stmt
 %type <transStmtList>    stmtList
@@ -271,10 +271,10 @@ formals : formalDecl
 			FormalDeclNode * formalDecl = $3;
 			$$->push_back(formalDecl);
 		}
-		|
+		/* |
 		{
 			$$ = new std::list<FormalDeclNode *>();
-		}
+		} */
 
 formalDecl 	: type id 
 			{
