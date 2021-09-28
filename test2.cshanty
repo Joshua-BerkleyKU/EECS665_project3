@@ -2,6 +2,7 @@ void function() {
   string test;
   bool notcool;
   test = "a hotdog is a sandwich";
+  function();
   int a;
   int b;
 }
