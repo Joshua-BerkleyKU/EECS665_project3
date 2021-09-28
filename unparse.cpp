@@ -276,8 +276,9 @@ void RecordTypeDeclNode::unparse(std::ostream& out, int indent) {
 	out << "record ";
 	this->myId->unparse(out, 0);
 	out << "{\n";
-	for (auto var: *variables) {
-		var->unparse(out, indent);
+	for (auto stmt: *variables)
+	{
+		stmt->unparse(out, indent);
 	}
 	out << "\n}\n";
 }
