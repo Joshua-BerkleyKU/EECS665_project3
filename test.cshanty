@@ -1,4 +1,4 @@
-void v() {
+void v(int a) {
     int a;
     a = 5;
 }
