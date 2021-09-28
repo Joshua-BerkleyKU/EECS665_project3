@@ -48,12 +48,330 @@ void VarDeclNode::unparse(std::ostream& out, int indent){
 	out << ";\n";
 }
 
+void FormalDeclNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	this->myType->unparse(out, 0);
+	out << " ";
+	this->myId->unparse(out, 0);
+}
+
 void IDNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << this->name;
 }
 
 void IntTypeNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << "int";
+}
+
+void BoolTypeNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "bool";
+}
+
+void VoidTypeNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "void";
+}
+
+void StringTypeNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "string";
+}
+
+void RecordTypeNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << this->myId;
+}
+
+void NotNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "not";
+}
+
+void NegNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "neg";
+}
+
+void TrueNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "true";
+}
+
+void FalseNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "false";
+}
+
+void StrLitNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << this->stringVal;
+}
+
+void IntLitNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << this->numval;
+}
+
+void TimesNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "(";
+	this->leftNode->unparse(out, 0);
+	out << " * ";
+	this->rightNode->unparse(out, 0);
+	out << ")";
+}
+
+void PlusNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "(";
+	this->leftNode->unparse(out, 0);
+	out << " + ";
+	this->rightNode->unparse(out, 0);
+	out << ")";
+}
+
+void OrNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "(";
+	this->leftNode->unparse(out, 0);
+	out << " || ";
+	this->rightNode->unparse(out, 0);
+	out << ")";
+}
+
+void NotEqualsNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "(";
+	this->leftNode->unparse(out, 0);
+	out << " != ";
+	this->rightNode->unparse(out, 0);
+	out << ")";
+}
+
+void MinusNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "(";
+	this->leftNode->unparse(out, 0);
+	out << " - ";
+	this->rightNode->unparse(out, 0);
+	out << ")";
+}
+
+void LessNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "(";
+	this->leftNode->unparse(out, 0);
+	out << " < ";
+	this->rightNode->unparse(out, 0);
+	out << ")";
+}
+
+void LessEqNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "(";
+	this->leftNode->unparse(out, 0);
+	out << " <= ";
+	this->rightNode->unparse(out, 0);
+	out << ")";
+}
+
+void GreaterNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "(";
+	this->leftNode->unparse(out, 0);
+	out << " > ";
+	this->rightNode->unparse(out, 0);
+	out << ")";
+}
+
+void GreaterEqNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "(";
+	this->leftNode->unparse(out, 0);
+	out << " >= ";
+	this->rightNode->unparse(out, 0);
+	out << ")";
+}
+
+void EqualsNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "(";
+	this->leftNode->unparse(out, 0);
+	out << " == ";
+	this->rightNode->unparse(out, 0);
+	out << ")";
+}
+
+void DivideNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "(";
+	this->leftNode->unparse(out, 0);
+	out << " / ";
+	this->rightNode->unparse(out, 0);
+	out << ")";
+}
+
+void AndNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "(";
+	this->leftNode->unparse(out, 0);
+	out << " && ";
+	this->rightNode->unparse(out, 0);
+	out << ")";
+}
+
+void AssignExpNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	this->variable->unparse(out, 0);
+	out << " = ";
+	this->expression->unparse(out, 0);
+	out << "; \n";
+}
+
+void IndexNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	this->Id_being_accessed->unparse(out, 0);
+	out << "[";
+	this->field_Name_being_accessed->unparse(out, 0);
+	out << "]";
+}
+
+void CallStmtNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	this->Function->unparse(out, 0);
+}
+
+void AssignStmtNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	this->assignment->unparse(out, 0);
+	
+}
+
+void PostDecStmtNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	this->variable->unparse(out, 0);
+	out << "--; \n";
+}
+
+void PostIncStmtNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	this->variable->unparse(out, 0);
+	out << "++; \n";
+}
+
+void ReceiveStmtNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "receive ";
+	this->variable->unparse(out, 0);
+	out << "; \n";
+}
+
+void ReportStmtNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "report ";
+	this->expression->unparse(out, 0);
+	out << "; \n";
+}
+
+void ReturnStmtNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
+	out << "return ";
+	this->expression->unparse(out, 0);
+	out << "; \n";
+}
+
+void RecordTypeDeclNode::unparse(std::ostream& out, int indent) {
+	doIndent(out, indent);
+	out << "record ";
+	this->myId->unparse(out, 0);
+	out << "{\n";
+	for (auto varDeclNode: *variables) {
+		varDeclNode->unparse(out, indent + 1);
+	}
+	out << "\n}\n";
+}
+
+void FnDeclNode::unparse(std::ostream& out, int indent) {
+	doIndent(out, indent);
+	this->myType->unparse(out, 0);
+	out << " ";
+	this->myId->unparse(out, 0);
+	out << "(";
+	
+	if (parameters != nullptr)
+	{
+		std::string comma = "";
+		for (auto param: *parameters)
+		{
+			out << comma;
+			param->unparse(out, 0);
+			comma = ", ";
+		}
+	}
+	
+	out << ") {\n";
+	for (auto stmt: *functionBody)
+	{
+		stmt->unparse(out, indent + 1);
+	}
+	out << "\n}\n";
+}
+
+void IfStmtNode::unparse(std::ostream& out, int indent) {
+	doIndent(out, indent);
+	out << "if (";
+	this->condition->unparse(out, 0); 
+	out << ") {\n";
+	for (auto stmt: *IfBody)
+	{
+		stmt->unparse(out, indent);
+	}
+	out << "\n}\n";
+}
+
+void IfElseStmtNode::unparse(std::ostream& out, int indent) {
+	doIndent(out, indent);
+	out << "if (";
+	this->condition->unparse(out, 0); 
+	out << ") {\n";
+	for (auto stmt: *IfTrueBody)
+	{
+		stmt->unparse(out, indent + 1);
+	}
+	out << "\n}\n else {\n";
+	for (auto stmt: *IfFalseBody)
+	{
+		stmt->unparse(out, indent + 1);
+	}
+	out << "\n}\n";
+}
+
+void WhileStmtNode::unparse(std::ostream& out, int indent) {
+	doIndent(out, indent);
+	out << "while ("; 
+	this->condition->unparse(out, 0); 
+	out << ") {\n";
+	for (auto stmt: *WhileBody)
+	{
+		stmt->unparse(out, indent + 1);
+	}
+	out << "\n}\n";
+}
+
+void CallExpNode::unparse(std::ostream& out, int indent) {
+	doIndent(out, indent);
+	this->nameFunc->unparse(out, 0); 
+	out << "(";
+	if (!(arguments == nullptr))
+	{
+		for (auto args: *arguments) {
+			args->unparse(out, 0);
+		}
+	}
+	out << ");\n";
 }
 
 } // End namespace cshanty

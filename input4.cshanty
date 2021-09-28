@@ -1,0 +1,4 @@
+record bruh {
+    int a;
+    int b;
+}

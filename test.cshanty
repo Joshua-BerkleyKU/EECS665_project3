@@ -1,0 +1,6 @@
+void v() {
+    if(a == b)
+    {
+        int a;
+    }
+}
