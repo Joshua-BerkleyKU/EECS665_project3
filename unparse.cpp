@@ -56,50 +56,62 @@ void FormalDeclNode::unparse(std::ostream& out, int indent){
 }
 
 void IDNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << this->name;
 }
 
 void IntTypeNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << "int";
 }
 
 void BoolTypeNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << "bool";
 }
 
 void VoidTypeNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << "void";
 }
 
 void StringTypeNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << "string";
 }
 
 void RecordTypeNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << this->myId;
 }
 
 void NotNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << "not";
 }
 
 void NegNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << "neg";
 }
 
 void TrueNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << "true";
 }
 
 void FalseNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << "false";
 }
 
 void StrLitNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << this->stringVal;
 }
 
 void IntLitNode::unparse(std::ostream& out, int indent){
+	doIndent(out, indent);
 	out << this->numval;
 }
 
