@@ -225,7 +225,12 @@ varDecl 	: type id SEMICOL
 		    	$$ = new VarDeclNode(p, $1, $2);
 		  	}
 
-varDeclList : varDecl { $$ = $1; }
+varDeclList : varDecl
+			{
+				$$ = new std::list<VarDeclNode *>();
+				VarDeclNode * varDecl = $1;
+				$$->push_back(varDecl);
+			}
 			| varDeclList varDecl 
 			{
 				$$ = $1; 

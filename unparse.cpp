@@ -258,7 +258,26 @@ void RecordTypeDeclNode::unparse(std::ostream& out, int indent) {
 	for (auto varDeclNode: *variables) {
 		varDeclNode->unparse(out, indent);
 	}
-	out << "}\n";
+	out << "\n}\n";
+}
+
+void FnDeclNode::unparse(std::ostream& out, int indent) {
+	doIndent(out, indent);
+	out << myType << " " << myId << "(";
+	if (!(parameters == nullptr))
+	{
+		for (auto param: *parameters) {
+			param->unparse(out, indent);
+		}
+	}
+	out << ") {\n";
+	for (auto stmt: *functionBody)
+	{
+		stmt->unparse(out, indent);
+	}
+	out << "\n}\n";
+	
+	
 }
 
 } // End namespace cshanty
