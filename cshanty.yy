@@ -71,17 +71,17 @@ project)
    cshanty::LValNode *                     transLVal;
 
    cshanty::ExpNode *                      transExp;
-   cshanty::ExpNode *                      transActualsList;
+   std::list<cshanty::ExpNode * > *        transActualsList;
    cshanty::ExpNode *                      transterm;
    cshanty::AssignExpNode *                transAssignExp;
    cshanty::CallExpNode *                  transCallExp;
    cshanty::FnDeclNode *                   transFnDecl;
    cshanty::RecordTypeDeclNode *           transRecordTypeDecl;
    cshanty::FormalDeclNode *               transFormalDecl;
-   cshanty::FormalDeclNode *               transFormals;
+   std::list<cshanty::FormalDeclNode *> *  transFormalDeclList;
    cshanty::VarDeclNode *                  transVarDecllist;
    cshanty::StmtNode *                     transStmt;
-   cshanty::StmtNode *                     transStmtList;
+   std::list<cshanty::StmtNode *> *        transStmtList;
 }
 
 %define parse.assert
@@ -161,7 +161,7 @@ project)
 %type <transFnDecl>     fnDecl
 %type <transRecordTypeDecl>  recordDecl
 %type <transFormalDecl> formalDecl
-%type <transFormals>     formals
+%type <transFormalDeclList>     formals
 %type <transVarList> 	varDeclList
 %type <transStmt>        stmt
 %type <transStmtList>    stmtList
@@ -260,8 +260,17 @@ fnDecl 	: type id LPAREN RPAREN OPEN stmtList CLOSE
 			$$ = new FnDeclNode(p, $1, $2, $4, $7);
 		}
 
-formals : formalDecl { $$ = $1; }
-		| formals COMMA formalDecl { }
+formals : formalDecl 
+		{ 
+			FormalDeclNode * formalDecl = $1;
+			$$->push_back(formalDecl); 
+		}
+		| formals COMMA formalDecl 
+		{ 
+			$$ = $1;
+			FormalDeclNode * formalDecl = $3;
+			$$->push_back(formalDecl);
+		}
 
 formalDecl 	: type id 
 			{
@@ -425,7 +434,11 @@ callExp	: id LPAREN RPAREN
 			$$ = new CallExpNode(p, $1, $3);
 		}
 
-actualsList	: exp { $$ = $1; }
+actualsList	: exp 
+		{ 
+			ExpNode * expNode = $1;
+			$$->push_back(expNode); 
+		}
 		| actualsList COMMA exp
 		{
 			$$ = $1; 
