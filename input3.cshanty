@@ -1,0 +1,26 @@
+int num;
+string msg;
+msg = "Input a number: ";
+report msg;
+receive num;
+if (num != 0) {
+    if (num <= 1) {
+        if (num >= 1) {
+            if (num < 2) {
+                if (num > 0) {
+                    if (num == 1) {
+                        string one = "1";
+                        report one;
+                    }
+                }
+            }
+        }
+    }
+}
+num++;
+num--;
+num = num + num;
+num = num - num;
+num = num * num;
+num = num / num;
+num = -num;
