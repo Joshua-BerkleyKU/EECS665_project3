@@ -260,8 +260,17 @@ fnDecl 	: type id LPAREN RPAREN OPEN stmtList CLOSE
 			$$ = new FnDeclNode(p, $1, $2, $4, $7);
 		}
 
-formals : formalDecl { $$ = $1; }
-		| formals COMMA formalDecl { }
+formals : formalDecl 
+		{ 
+			FormalDeclNode * formalDecl = $1;
+			$$->push_back(formalDecl); 
+		}
+		| formals COMMA formalDecl 
+		{ 
+			$$ = $1;
+			FormalDeclNode * formalDecl = $3;
+			$$->push_back(formalDecl);
+		}
 
 formalDecl 	: type id 
 			{
