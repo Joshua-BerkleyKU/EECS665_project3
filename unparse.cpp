@@ -307,8 +307,8 @@ void IfStmtNode::unparse(std::ostream& out, int indent) {
 	doIndent(out, indent);
 	out << " If (";
 	this->condition->unparse(out, 0); 
-	out << ") {\n" << this->IfBody->size();
-	//out << this->IfBody->size();
+	out << ") {\n";
+	out << IfBody->empty();
 	/*for (auto stmt: *IfBody)
 	{
 		stmt->unparse(out, indent);
