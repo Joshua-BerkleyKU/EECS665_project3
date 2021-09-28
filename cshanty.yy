@@ -78,7 +78,7 @@ project)
    cshanty::FnDeclNode *                   transFnDecl;
    cshanty::RecordTypeDeclNode *           transRecordTypeDecl;
    cshanty::FormalDeclNode *               transFormalDecl;
-   cshanty::FormalDeclNode *               transFormals;
+   std::list<cshanty::FormalDeclNode *> *  transFormalDeclList;
    cshanty::VarDeclNode *                  transVarDecllist;
    cshanty::StmtNode *                     transStmt;
    std::list<cshanty::StmtNode *> *        transStmtList;
