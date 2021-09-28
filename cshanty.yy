@@ -63,6 +63,7 @@ project)
    cshanty::StrToken*                      transStrToken;
    cshanty::ProgramNode*                   transProgram;
    std::list<cshanty::DeclNode *> *        transDeclList;
+   std::list<cshanty::VarDeclNode *> *     transVarList;
    cshanty::DeclNode *                     transDecl;
    cshanty::VarDeclNode *                  transVarDecl;
    cshanty::TypeNode *                     transType;
@@ -161,7 +162,7 @@ project)
 %type <transRecordTypeDecl>  recordDecl
 %type <transFormalDecl> formalDecl
 %type <transFormals>     formals
-%type <transVarDecllist> varDeclList
+%type <transVarList> 	varDeclList
 %type <transStmt>        stmt
 %type <transStmtList>    stmtList
 %type <transActualsList> actualsList
@@ -227,7 +228,6 @@ varDecl 	: type id SEMICOL
 
 varDeclList : varDecl
 			{
-				$$ = new std::list<VarDeclNode *>();
 				VarDeclNode * varDecl = $1;
 				$$->push_back(varDecl);
 			}
