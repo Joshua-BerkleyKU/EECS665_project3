@@ -161,7 +161,7 @@ project)
 %type <transFnDecl>     fnDecl
 %type <transRecordTypeDecl>  recordDecl
 %type <transFormalDecl> formalDecl
-%type <transFormals>     formals
+%type <transFormalDeclList>     formals
 %type <transVarList> 	varDeclList
 %type <transStmt>        stmt
 %type <transStmtList>    stmtList
