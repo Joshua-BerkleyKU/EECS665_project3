@@ -269,7 +269,12 @@ formalDecl 	: type id
 			}
 
 stmtList 	: /* epsilon */ { }
-			| stmtList stmt { }
+			| stmtList stmt 
+			{ 
+				$$ = $1;
+				StmtDeclNode * stmt = $2;
+				$$->push_back(stmt);
+			}
 
 stmt	: varDecl { $$ = $1; }
 		| assignExp SEMICOL 
