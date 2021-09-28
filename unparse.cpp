@@ -295,7 +295,7 @@ void FnDeclNode::unparse(std::ostream& out, int indent) {
 		{
 			out << comma;
 			param->unparse(out, 0);
-			comma = ",";
+			comma = ", ";
 		}
 	}
 	out << ") {\n";
