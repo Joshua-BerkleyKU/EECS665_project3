@@ -288,7 +288,7 @@ void FnDeclNode::unparse(std::ostream& out, int indent) {
 	out << " ";
 	this->myId->unparse(out, 0);
 	out << "(";
-	if (!(parameters == nullptr))
+	if (parameters != nullptr)
 	{
 		out << parameters->size();
 		for (auto param: *parameters)
