@@ -41,11 +41,11 @@ void ProgramNode::unparse(std::ostream& out, int indent){
 }
 
 void VarDeclNode::unparse(std::ostream& out, int indent){
-	doIndent(out, indent);
+	/*doIndent(out, indent);
 	this->myType->unparse(out, 0);
 	out << " ";
 	this->myId->unparse(out, 0);
-	out << ";\n";
+	out << ";\n";*/
 }
 
 void FormalDeclNode::unparse(std::ostream& out, int indent){
