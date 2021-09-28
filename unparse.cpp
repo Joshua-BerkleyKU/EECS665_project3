@@ -288,9 +288,10 @@ void FnDeclNode::unparse(std::ostream& out, int indent) {
 	out << " ";
 	this->myId->unparse(out, 0);
 	out << "(";
-	/*
+	
 	if (parameters != nullptr)
 	{
+		/*
 		std::string comma = "";
 		for (auto param: *parameters)
 		{
@@ -298,8 +299,9 @@ void FnDeclNode::unparse(std::ostream& out, int indent) {
 			param->unparse(out, 0);
 			comma = ", ";
 		}
+		*/
 	}
-	*/
+	
 	out << ") {\n";
 	for (auto stmt: *functionBody)
 	{
