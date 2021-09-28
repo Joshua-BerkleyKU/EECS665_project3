@@ -271,6 +271,10 @@ formals : formalDecl
 			FormalDeclNode * formalDecl = $3;
 			$$->push_back(formalDecl);
 		}
+		|
+		{
+			$$ = new std::list<FormalDeclNode *>();
+		}
 
 formalDecl 	: type id 
 			{
