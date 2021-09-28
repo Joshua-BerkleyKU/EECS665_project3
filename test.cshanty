@@ -3,7 +3,4 @@ void v() {
     {
         int a;
     }
-    else {
-        int a;
-    }
 }
