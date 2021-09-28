@@ -288,13 +288,13 @@ void FnDeclNode::unparse(std::ostream& out, int indent) {
 	out << " ";
 	this->myId->unparse(out, 0);
 	out << "(";
-	if (!(parameters == nullptr))
-	{
+	// if (!(parameters == nullptr))
+	// {
 		for (auto param: *parameters)
 		{
 			param->unparse(out, 0);
 		}
-	}
+	// }
 	out << ") {\n";
 	for (auto stmt: *functionBody)
 	{
