@@ -230,16 +230,17 @@ varDeclList : varDecl
 			{
 				VarDeclNode * varDecl = $1;
 				$$->push_back(varDecl);
+				if ($$->empty())
+				{
+					$$ = new std::list<VarDeclNode * >();
+				}
 			}
 			| varDeclList varDecl 
 			{
 				$$ = $1; 
 				VarDeclNode * varDeclNode = $2;
 				$$->push_back(varDeclNode);
-				if ($$->empty())
-				{
-					$$ = new std::list<VarDeclNode * >();
-				}
+				
 			}
 
 type 	: INT { $$ = new IntTypeNode($1->pos()); }
