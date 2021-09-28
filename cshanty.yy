@@ -233,14 +233,13 @@ varDeclList : varDecl
 			}
 			| varDeclList varDecl 
 			{
+				$$ = $1; 
+				VarDeclNode * varDeclNode = $2;
+				$$->push_back(varDeclNode);
 				if ($$->empty())
 				{
 					$$ = new std::list<VarDeclNode * >();
 				}
-				$$ = $1; 
-				VarDeclNode * varDeclNode = $2;
-				$$->push_back(varDeclNode);
-				
 			}
 
 type 	: INT { $$ = new IntTypeNode($1->pos()); }
