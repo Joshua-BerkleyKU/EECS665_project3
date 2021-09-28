@@ -71,7 +71,7 @@ project)
    cshanty::LValNode *                     transLVal;
 
    cshanty::ExpNode *                      transExp;
-   cshanty::ExpNode *                      transActualsList;
+   std::list<cshanty::ExpNode * > *        transActualsList;
    cshanty::ExpNode *                      transterm;
    cshanty::AssignExpNode *                transAssignExp;
    cshanty::CallExpNode *                  transCallExp;
@@ -434,7 +434,11 @@ callExp	: id LPAREN RPAREN
 			$$ = new CallExpNode(p, $1, $3);
 		}
 
-actualsList	: exp { $$ = $1; }
+actualsList	: exp 
+		{ 
+			ExpNode * expNode = $1;
+			$$->push_back(expNode); 
+		}
 		| actualsList COMMA exp
 		{
 			$$ = $1; 
