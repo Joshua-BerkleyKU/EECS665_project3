@@ -228,19 +228,15 @@ varDecl 	: type id SEMICOL
 
 varDeclList : varDecl
 			{
+				$$ = new std::list<VarDeclNode * >();
 				VarDeclNode * varDecl = $1;
 				$$->push_back(varDecl);
-				if ($$->empty())
-				{
-					$$ = new std::list<VarDeclNode * >();
-				}
 			}
 			| varDeclList varDecl 
 			{
 				$$ = $1; 
 				VarDeclNode * varDeclNode = $2;
-				$$->push_back(varDeclNode);
-				
+				$$->push_back(varDeclNode);		
 			}
 
 type 	: INT { $$ = new IntTypeNode($1->pos()); }
