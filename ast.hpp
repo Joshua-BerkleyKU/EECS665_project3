@@ -205,7 +205,8 @@ public:
 
 class WhileStmtNode : public StmtNode{
 public:
-	WhileStmtNode(Position * p , ExpNode * Condition ) : StmtNode(p), condition(Condition) { }
+	WhileStmtNode(Position * p , ExpNode * Condition, std::list<StmtNode *> * body ) 
+	: StmtNode(p), condition(Condition), WhileBody(body) { }
 	void unparse(std::ostream& out, int indent) override;
 	private:
 	ExpNode * condition;
@@ -214,7 +215,8 @@ public:
 
 class IfStmtNode : public StmtNode{
 public:
-	IfStmtNode(Position * p , ExpNode * Condition ) : StmtNode(p), condition(Condition) { }
+	IfStmtNode(Position * p , ExpNode * Condition , std::list<StmtNode *> * body) 
+	: StmtNode(p), condition(Condition), IfBody(body) { }
 	void unparse(std::ostream& out, int indent) override;
 	private:
 	ExpNode * condition;
@@ -223,7 +225,8 @@ public:
 
 class IfElseStmtNode : public StmtNode{
 public:
-	IfElseStmtNode(Position * p , ExpNode * Condition ) : StmtNode(p), condition(Condition) { }
+	IfElseStmtNode(Position * p , ExpNode * Condition, std::list<StmtNode *> * tbody, std::list<StmtNode *> * fbody ) 
+	: StmtNode(p), condition(Condition), IfTrueBody(tbody) ,IfFalseBody(fbody) { }
 	void unparse(std::ostream& out, int indent) override;
 	private:
 	ExpNode * condition;
