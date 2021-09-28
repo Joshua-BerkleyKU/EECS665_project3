@@ -81,7 +81,7 @@ project)
    cshanty::FormalDeclNode *               transFormals;
    cshanty::VarDeclNode *                  transVarDecllist;
    cshanty::StmtNode *                     transStmt;
-   cshanty::StmtNode *                     transStmtList;
+   std::list<cshanty::StmtNode *> *        transStmtList;
 }
 
 %define parse.assert
