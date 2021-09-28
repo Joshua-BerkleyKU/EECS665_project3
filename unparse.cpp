@@ -314,10 +314,11 @@ void IfStmtNode::unparse(std::ostream& out, int indent) {
 	out << " if (";
 	this->condition->unparse(out, 0); 
 	out << ") {\n";
-	for (auto stmt: *IfBody)
+	out << ") {\n";
+	/*for (auto stmt: *IfBody)
 	{
 		stmt->unparse(out, indent);
-	}
+	}*/
 	out << "\n}\n";
 }
 
@@ -360,7 +361,7 @@ void CallExpNode::unparse(std::ostream& out, int indent) {
 			args->unparse(out, indent);
 		}
 	}
-	out << ");";
+	out << ");\n";
 }
 
 } // End namespace cshanty

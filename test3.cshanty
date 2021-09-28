@@ -2,3 +2,14 @@ void v(int b) {
     int a;
     a = 0;
 }
+
+record test {
+  int test;
+  int test;
+}
+
+void function() {
+  int a;
+  a = 1;
+  a++;
+}

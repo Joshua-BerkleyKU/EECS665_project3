@@ -1,4 +1,6 @@
 void v() {
-    int a;
-    a = 5;
+    if(a == b)
+    {
+        int a;
+    }
 }
