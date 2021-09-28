@@ -316,17 +316,17 @@ stmt	: varDecl { $$ = $1; }
 		| IF LPAREN exp RPAREN OPEN stmtList CLOSE 
 		{ 
 			Position * p = new Position($1->pos(), $7->pos());
-			$$ = new IfStmtNode(p, $3);
+			$$ = new IfStmtNode(p, $3, $6);
 		}
 		| IF LPAREN exp RPAREN OPEN stmtList CLOSE ELSE OPEN stmtList CLOSE
 		{ 
 			Position * p = new Position($1->pos(), $11->pos());
-			$$ = new IfElseStmtNode(p, $3);
+			$$ = new IfElseStmtNode(p, $3, $6, $10);
 		}
 		| WHILE LPAREN exp RPAREN OPEN stmtList CLOSE 
 		{ 
 			Position * p = new Position($1->pos(), $7->pos());
-			$$ = new WhileStmtNode(p, $3);
+			$$ = new WhileStmtNode(p, $3, $6);
 		}
 		| RETURN exp SEMICOL 
 		{ 
