@@ -1,4 +1,7 @@
-
+record test {
+  int test;
+  int test;
+}
 
 void function() {
   int a;
