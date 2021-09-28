@@ -290,9 +290,9 @@ void FnDeclNode::unparse(std::ostream& out, int indent) {
 	out << "(";
 	if (!(parameters == nullptr))
 	{
-		for (auto stmt: *parameters)
+		for (auto param: *parameters)
 		{
-			stmt->unparse(out, indent);
+			param->unparse(out, 0);
 		}
 	}
 	out << ") {\n";
