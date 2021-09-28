@@ -202,13 +202,6 @@ void IndexNode::unparse(std::ostream& out, int indent){
 	out << "] ";
 }
 
-void CallExpNode::unparse(std::ostream& out, int indent){
-	doIndent(out, indent);
-	this->nameFunc->unparse(out, 0);
-	out << " ";
-	//need work for the list
-}
-
 void CallStmtNode::unparse(std::ostream& out, int indent){
 	doIndent(out, indent);
 	this->Function->unparse(out, 0);
@@ -285,7 +278,7 @@ void FnDeclNode::unparse(std::ostream& out, int indent) {
 
 void IfStmtNode::unparse(std::ostream& out, int indent) {
 	doIndent(out, indent);
-	out << " If (";
+	out << " if (";
 	this->condition->unparse(out, 0); 
 	out << ") {\n";
 	for (auto stmt: *IfBody)
@@ -297,7 +290,7 @@ void IfStmtNode::unparse(std::ostream& out, int indent) {
 
 void IfElseStmtNode::unparse(std::ostream& out, int indent) {
 	doIndent(out, indent);
-	out << " If (";
+	out << " if (";
 	this->condition->unparse(out, 0); 
 	out << ") {\n";
 	for (auto stmt: *IfTrueBody)
@@ -314,7 +307,7 @@ void IfElseStmtNode::unparse(std::ostream& out, int indent) {
 
 void WhileStmtNode::unparse(std::ostream& out, int indent) {
 	doIndent(out, indent);
-	out << " While ("; 
+	out << " while ("; 
 	this->condition->unparse(out, 0); 
 	out << ") {\n";
 	for (auto stmt: *WhileBody)
