@@ -260,7 +260,7 @@ fnDecl 	: type id LPAREN RPAREN OPEN stmtList CLOSE
 			$$ = new FnDeclNode(p, $1, $2, $4, $7);
 		}
 
-formals : { $$ = new std::list<FormalDeclNode *>(); }
+formals : /* epsilon */ { $$ = new std::list<FormalDeclNode *>(); }
 		| formalDecl 
 		{ 
 			FormalDeclNode * formalDecl = $1;
